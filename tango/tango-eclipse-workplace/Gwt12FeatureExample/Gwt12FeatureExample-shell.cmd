@@ -1,0 +1,1 @@
+@java -cp "%~dp0\src;%~dp0\bin;C:/GWT/gwt-windows-1.2.22/gwt-user.jar;C:/GWT/gwt-windows-1.2.22/gwt-dev-windows.jar" com.google.gwt.dev.GWTShell -out "%~dp0\www" %* com.mamezou.gwt.Gwt12FeatureExample/Gwt12FeatureExample.html

@@ -1,0 +1,17 @@
+package tango.client.word;
+
+import java.util.ArrayList;
+
+import tango.client.ui.PickupTango;
+import tango.client.ui.PickupTangoResultSet;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+/**
+ * @author yasukawa
+ *
+ */
+public interface PickupWordServiceAsync {
+	public void pickupWordService(PickupTangoResultSet msg, AsyncCallback<ArrayList<PickupTango>> callback);
+
+}

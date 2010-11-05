@@ -1,0 +1,12 @@
+!SESSION 2009-12-28 19:20:48.174 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=ja_JP
+Command-line arguments:  -data /home/yohei/work/Tangos/tango-latest/tango -os linux -ws gtk -arch x86_64
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2009-12-28 19:20:51.982
+!MESSAGE Registering: com.google.gwt.eclipse.sdkbundle.linux_1.6.4.v200904062334
+
+!ENTRY com.google.gdt.eclipse.suite 1 0 2009-12-28 19:20:52.251
+!MESSAGE Registering: com.google.appengine.eclipse.sdkbundle_1.2.1.v200905131143

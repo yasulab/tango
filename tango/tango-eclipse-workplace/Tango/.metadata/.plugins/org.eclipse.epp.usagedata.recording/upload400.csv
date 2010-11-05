@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790084125
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790084140
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790084156
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790084171
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234790089703
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790093750
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790107140
+opened,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790109578
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790109640
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790114359
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790121453
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790132687
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.findReplace,1234790132875
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790140593
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234790140671
+opened,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790142203
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790142281
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234790143093
+opened,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790143312
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234790143390
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790145687
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.findReplace,1234790145828
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234790151265
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234790151375
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.findReplace,1234790152390

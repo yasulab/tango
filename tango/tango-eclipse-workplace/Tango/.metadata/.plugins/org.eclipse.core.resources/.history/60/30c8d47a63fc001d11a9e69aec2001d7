@@ -1,0 +1,546 @@
+package tango.server.rss;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+
+import tango.client.rss.NewsFields;
+import tango.client.rss.NewsRanking;
+import tango.client.rss.RankingFields;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+/**
+ * <p>
+ * ニュースデータとランキングデータを保持するクラスです。
+ * </p>
+ * <p>
+ * 外部的には、生成されたランキングデータを提供します。<br>
+ * 内部的には、このクラスからプロパティを読み込み、{@link NewsFieldsFactory}クラスを呼び出してニュースを取得し、
+ * {@link RankingFieldsFactory}クラスを呼び出してランキングを生成します。
+ * </p>
+ * 
+ * @author Ukit Grey
+ * @version 1.2
+ */
+public class NewsRankingImpl extends RemoteServiceServlet implements
+		NewsRanking {
+	private static final long serialVersionUID = 1L;
+	private static final int CATEGORY = 4;
+	private static final int NEWS_TYPE = 3;
+	private static final String PROPERTIES_ADDRESS = "properties\\rss.properties";
+	private static final String PROPERTIES_CORE_SETTINGS = ".coreSettings";
+	private static final String PROPERTIES_EXAMPLE = ".example";
+	private static final String PROPERTIES_ROOT = "newsRanking";
+
+	private static final String PROPERTIES_USER = ".user";
+	private static final String PROPERTIES_YAHOO = ".yahoo";
+	private static final int USES_PROPERTIES = 2;
+	private static final int USES_PROXY = 1;
+	private static final int USES_WINDOW = 0;
+
+	/**
+	 * <p>
+	 * プログラム起動時の引数に含まれるオプションを解析します。
+	 * </p>
+	 * 
+	 * @param args
+	 *            プログラム引数
+	 * @return 解析したデータ
+	 */
+	public static List<String> getOptions(String[] args) {
+		List<String> options = new ArrayList<String>(args.length + CATEGORY);
+
+		// 　引数指定がなかった時のデフォルトオプション
+		options.add("window");
+		options.add("direct");
+		options.add("properties");
+		options.add("topics");
+
+		boolean hasAll = false;
+
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("-win"))
+				options.set(USES_WINDOW, "window");
+			else if (args[i].equals("-prom"))
+				options.set(USES_WINDOW, "prompt");
+			else if (args[i].equals("-prox"))
+				options.set(USES_PROXY, "proxy");
+			else if (args[i].equals("-dir"))
+				options.set(USES_PROXY, "direct");
+			else if (args[i].equals("-prop"))
+				options.set(USES_PROPERTIES, "properties");
+			else if (args[i].equals("-opt"))
+				options.set(USES_PROPERTIES, "option");
+			else if (args[i].equals("-help"))
+				options.set(NEWS_TYPE, "help");
+			else if (args[i].equals("-topics"))
+				options.set(NEWS_TYPE, "topics");
+			else if (args[i].equals("-rss")) {
+				options.set(NEWS_TYPE, "rss");
+				if (i < args.length - 1)
+					if (args[i + 1].indexOf("-") != 0)
+						options.add(args[++i]);
+			}
+
+			// 以下Yahoo！トピックスの指定コマンド。　あまり使えない
+			else if (args[i].equals("-dom"))
+				options.add("domestic");
+			else if (args[i].equals("-wor"))
+				options.add("world");
+			else if (args[i].equals("-eco"))
+				options.add("economy");
+			else if (args[i].equals("-ent"))
+				options.add("entertainment");
+			else if (args[i].equals("-spo"))
+				options.add("sports");
+			else if (args[i].equals("-com"))
+				options.add("computer");
+			else if (args[i].equals("-sci"))
+				options.add("science");
+			else if (args[i].equals("-loc"))
+				options.add("local");
+			else if (args[i].equals("-all")) {
+				options.add("all");
+				hasAll = true;
+			}
+		}
+
+		if (hasAll)
+			while (CATEGORY < options.size())
+				options.remove(CATEGORY);
+
+		if (options.get(NEWS_TYPE).equals("topics"))
+			if (options.size() == CATEGORY)
+				options.add("all");
+
+		return options;
+	}
+
+	private List<String> channelLinks;
+	private List<String> channelTitles;
+	private List<String> excludeKeywords;
+	private String newsType;
+	private Properties properties;
+	private Set<RankingFields> rankingFieldsCollection;
+	private boolean usesProperties;
+	private boolean usesProxy;
+	private List<Boolean> usesThisChannel;
+
+	/**
+	 * <p>
+	 * このクラスのインスタンスを生成します。
+	 * </p>
+	 * <p>
+	 * デフォルトコンストラクタによって作成されるのは、デフォルト設定のオプションでの設定項目のみです。<br>
+	 * ランキング自体は作成されません。
+	 * </p>
+	 * <p>
+	 * GWTではserver上のコンストラクタはデフォルトコンストラクタを読むしか方法が無いため、<br>
+	 * このコンストラクタによってインスタンスを作成します。<br>
+	 * 生成後、初期化を行うことでランキングを取得出来ます。
+	 * </p>
+	 * 
+	 * @since 1.2
+	 */
+	public NewsRankingImpl() {
+		String[] tmp = {};
+		initializeOptions(getOptions(tmp));
+	}
+
+	/**
+	 * <p>
+	 * デフォルトのプロパティを使ってこのクラスのインスタンスを生成します。
+	 * </p>
+	 * <p>
+	 * デフォルトでは、JavaVMのルートディレクトリからの相対パスproperties\rss.propertiesにあるファイルを利用します。<br>
+	 * 引数でプロパティを使用しない設定を行った場合は、Yahoo!トピックスを全て取得します。
+	 * </p>
+	 * 
+	 * @param options
+	 *            解析されたオプション
+	 */
+	public NewsRankingImpl(List<String> options) {
+		initializeOptions(options);
+
+		initialize();
+	}
+
+	/**
+	 * <p>
+	 * デフォルトのプロパティを使ってこのクラスのインスタンスを生成します。
+	 * </p>
+	 * <p>
+	 * pathの末尾が.propertiesであればpathにあるプロパティを使いインスタンスを生成します。<br>
+	 * pathがそれ以外の文字列であればpathをURLとして扱いプロパティを生成し、そのプロパティを使いインスタンスを生成します。
+	 * </p>
+	 * 
+	 * @param options
+	 *            解析されたオプション
+	 * @param path
+	 *            末尾が.propertiesであればプロパティのパス、それ以外であればURL
+	 * @since 1.2
+	 */
+	public NewsRankingImpl(List<String> options, String path) {
+		initializeOptions(options);
+
+		initialize(path);
+	}
+
+	/**
+	 * <p>
+	 * プロパティファイルを外部から指定してクラスのインスタンスを生成します。
+	 * </p>
+	 * 
+	 * @param properties
+	 *            指定されたプロパティ
+	 * @since 1.2
+	 */
+	public NewsRankingImpl(Properties properties) {
+		String[] tmp = {};
+		initializeOptions(getOptions(tmp));
+
+		initialize(properties);
+	}
+
+	/**
+	 * 
+	 * @param path
+	 *            URL
+	 * @return properties pathから生成されるプロパティ
+	 * @since 1.2
+	 */
+	private Properties createProperties(String path) {
+		Properties properties = new Properties(this.properties);
+
+		return properties;
+	}
+
+	/**
+	 * <p>
+	 * 実際にランキングを生成するメソッドです。
+	 * </p>
+	 * 
+	 * @since 1.2
+	 */
+	private void createRanking() {
+		try {
+			NewsFieldsFactory myNewsFieldsFactory = NewsFieldsFactory
+					.newInstance(usesProxy, newsType, channelTitles,
+							channelLinks, usesThisChannel, excludeKeywords);
+			List<NewsFields> myNewsFieldsCollection = myNewsFieldsFactory
+					.newAllNewsFieldsCollection();
+
+			RankingFieldsFactory myRankingFieldsFactory = RankingFieldsFactory
+					.newInstance(usesProxy, myNewsFieldsCollection);
+			rankingFieldsCollection = myRankingFieldsFactory
+					.newAllRankingFieldsCollection();
+
+		} catch (IOException e) {
+			System.out.println(e);
+		} catch (NullPointerException e) {
+		}
+	}
+
+	/**
+	 * <p>
+	 * {@link RankingFields}クラスのコレクションを返します。
+	 * </p>
+	 * 
+	 * @return {@link RankingFields}クラスのコレクション
+	 */
+	public Set<RankingFields> getRankingFieldsCollection() {
+		return rankingFieldsCollection;
+	}
+
+	/**
+	 * <p>
+	 * デフォルトのプロパティを使ってこのインスタンスを初期化します。
+	 * </p>
+	 * <p>
+	 * デフォルトでは、JavaVMのルートディレクトリからの相対パスproperties\rss.propertiesにあるファイルを利用します。<br>
+	 * 引数でプロパティを使用しない設定を行った場合は、Yahoo!トピックスを全て取得します。
+	 * </p>
+	 * <p>
+	 * 一度インスタンスを作成した後に、ニュースの再取得を行う場合に使用します。<br>
+	 * また、GWTなどデフォルトコンストラクタでしかインスタンスを生成できない際に使用します。
+	 * </p>
+	 * 
+	 * @since 1.2
+	 */
+	public void initialize() {
+		if (usesProperties)
+			loadProperties(PROPERTIES_ADDRESS);
+		createRanking();
+	}
+
+	/**
+	 * <p>
+	 * 指定されたプロパティを使ってこのインスタンスを初期化します。
+	 * </p>
+	 * <p>
+	 * 引数でプロパティを使用しない設定を行った場合は、Yahoo!トピックスを全て取得します。
+	 * </p>
+	 * <p>
+	 * 一度インスタンスを作成した後に、ニュースの再取得を行う場合に使用します。<br>
+	 * また、GWTなどデフォルトコンストラクタでしかインスタンスを生成できない際に使用します。
+	 * </p>
+	 * 
+	 * @param properties
+	 *            指定されたプロパティ
+	 * @since 1.2
+	 */
+	public void initialize(Properties properties) {
+		if (usesProperties)
+			loadProperties(properties);
+		createRanking();
+	}
+
+	/**
+	 * <p>
+	 * 引数に指定されたpathを使ってこのインスタンスを初期化します。
+	 * </p>
+	 * <p>
+	 * pathの末尾が.propertiesであればpathにあるプロパティを使い{@link #initialize(Properties)}
+	 * によって初期化を行います。<br>
+	 * pathがそれ以外の文字列であればpathをURLとして扱いプロパティファイルを生成し、
+	 * {@link #initialize(Properties)}によって初期化を行います。
+	 * </p>
+	 * 
+	 * @param path
+	 *            末尾が.propertiesであればプロパティのパス、それ以外であればURL
+	 * @since 1.2
+	 */
+	public void initialize(String path) {
+		System.out.println("initialize(" + path + ")");
+		if (path == null || path == "")
+			path = PROPERTIES_ADDRESS;
+		if (path.matches(".*(\\.properties)$"))
+			loadProperties(path);
+		else
+			loadProperties(createProperties(path));
+		createRanking();
+	}
+
+	/**
+	 * <p>
+	 * 解析されたオプションから、このインスタンスのフィールドを初期化します。
+	 * </p>
+	 * 
+	 * @param options
+	 *            解析されたオプション 解析されたオプション
+	 */
+	private void initializeOptions(List<String> options) {
+		// プロキシの設定
+		if (options.get(USES_PROXY).equals("proxy"))
+			this.usesProxy = true;
+		else if (options.get(USES_PROXY).equals("direct"))
+			this.usesProxy = false;
+		else
+			this.usesProxy = false;
+
+		// プロパティファイルを利用するか
+		if (options.get(USES_PROPERTIES).equals("properties"))
+			this.usesProperties = true;
+		else if (options.get(USES_PROPERTIES).equals("option"))
+			this.usesProperties = false;
+		else
+			this.usesProperties = false;
+
+		newsType = options.get(NEWS_TYPE);
+
+		channelTitles = new ArrayList<String>();
+		for (int i = CATEGORY; i < options.size(); i++)
+			channelTitles.add("Yahoo!ニュース - トピックスAPI - " + options.get(i));
+
+		channelLinks = new ArrayList<String>();
+		for (int i = CATEGORY; i < options.size(); i++)
+			channelLinks.add(options.get(i));
+
+		excludeKeywords = new ArrayList<String>();
+		for (int i = CATEGORY; i < options.size(); i++)
+			excludeKeywords.add("");
+
+		usesThisChannel = new ArrayList<Boolean>();
+		for (int i = CATEGORY; i < options.size(); i++)
+			usesThisChannel.add(true);
+	}
+
+	/**
+	 * <p>
+	 * 指定されたプロパティファイルを読み込みます。
+	 * </p>
+	 * 
+	 * @param properties
+	 *            指定されたプロパティファイル
+	 * @since 1.2
+	 */
+	private void loadProperties(Properties properties) {
+		this.properties = properties;
+		loadPropertiesImpl(this.properties);
+	}
+
+	/**
+	 * <p>
+	 * デフォルトのプロパティファイルを読み込みます。
+	 * </p>
+	 * <p>
+	 * プロパティファイルが存在しない場合は、サンプルのプロパティファイルを出力して終了します。
+	 * </p>
+	 */
+	private void loadProperties(String path) {
+		try {
+			this.properties = new Properties();
+			this.properties.loadFromXML(new FileInputStream(path));
+			loadPropertiesImpl(properties);
+		} catch (FileNotFoundException e) {
+			// 　exampleの.propertiesを保存
+			try {
+				properties.setProperty(PROPERTIES_ROOT
+						+ PROPERTIES_CORE_SETTINGS + ".useProxy", "false");
+				properties.setProperty(PROPERTIES_ROOT
+						+ PROPERTIES_CORE_SETTINGS + ".newsType", "rss");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE,
+						"this is an example");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE
+						+ ".category01", ".categoryName");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE
+						+ ".categoryName" + ".channel" + "01" + ".title",
+						"このソースのタイトル");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE
+						+ ".categoryName" + ".channel" + "01" + ".link",
+						"URLを記述");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE
+						+ ".categoryName" + ".channel" + "01"
+						+ ".excludesKeyword", "正規表現で対象外とするワードを記述");
+				properties.setProperty(PROPERTIES_ROOT + PROPERTIES_EXAMPLE
+						+ ".categoryName" + ".channel" + "01"
+						+ ".useThisChannel", "このソースを使用するかどうか boolean型");
+				properties.storeToXML(new FileOutputStream(PROPERTIES_ADDRESS),
+						PROPERTIES_ADDRESS);
+				loadProperties(path);
+			} catch (IOException e1) {
+				System.out.println(e1);
+			}
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * <p>
+	 * プロパティファイルを読み込む実命令です。
+	 * </p>
+	 * <p>
+	 * 読み込まれた内容は{@link NewsRanking}に格納されます。
+	 * </p>
+	 * 
+	 * @param properties
+	 *            指定されたプロパティファイル
+	 * @since 1.2
+	 */
+	private void loadPropertiesImpl(Properties properties) {
+		usesProxy = properties.getProperty(
+				PROPERTIES_ROOT + PROPERTIES_CORE_SETTINGS + ".useProxy")
+				.equals("true");
+
+		newsType = properties.getProperty(PROPERTIES_ROOT
+				+ PROPERTIES_CORE_SETTINGS + ".newsType");
+
+		channelTitles.clear();
+		channelLinks.clear();
+		excludeKeywords.clear();
+		usesThisChannel.clear();
+
+		String category;
+		String title;
+		String link;
+		String excludesKeyword;
+		boolean usesThisChannel;
+
+		// Yahoo関連のニュースを呼び出し
+		for (int i = 1;; i++) {
+			String zero1 = "";
+			if (i < 10)
+				zero1 = "0";
+			category = properties.getProperty(PROPERTIES_ROOT
+					+ PROPERTIES_YAHOO + ".category" + zero1 + i);
+
+			for (int j = 1;; j++) {
+				String zero2 = "";
+				if (j < 10)
+					zero2 = "0";
+
+				title = properties.getProperty(PROPERTIES_ROOT
+						+ PROPERTIES_YAHOO + category + ".channel" + zero2 + j
+						+ ".title");
+				link = properties.getProperty(PROPERTIES_ROOT
+						+ PROPERTIES_YAHOO + category + ".channel" + zero2 + j
+						+ ".link");
+				excludesKeyword = properties.getProperty(PROPERTIES_ROOT
+						+ PROPERTIES_YAHOO + category + ".channel" + zero2 + j
+						+ ".excludesKeyword");
+
+				if (title == null)
+					break;
+
+				usesThisChannel = properties.getProperty(
+						PROPERTIES_ROOT + PROPERTIES_YAHOO + category
+								+ ".channel" + zero2 + j + ".usesThisChannel")
+						.equals("true");
+
+				this.channelTitles.add(title);
+				this.channelLinks.add(link);
+				this.excludeKeywords.add(excludesKeyword);
+				this.usesThisChannel.add(usesThisChannel);
+
+			}
+			if (category == null)
+				break;
+		}
+
+		// ユーザ定義のニュースを呼び出し
+		for (int i = 1;; i++) {
+			String zero1 = "";
+			if (i < 10)
+				zero1 = "0";
+			category = properties.getProperty(PROPERTIES_ROOT + PROPERTIES_USER
+					+ ".category" + zero1 + i);
+
+			for (int j = 1;; j++) {
+				String zero = "";
+				if (j < 10)
+					zero = "0";
+
+				title = properties.getProperty(PROPERTIES_ROOT
+						+ PROPERTIES_USER + category + ".channel" + zero + j
+						+ ".title");
+				link = properties.getProperty(PROPERTIES_ROOT + PROPERTIES_USER
+						+ category + ".channel" + zero + j + ".link");
+				excludesKeyword = properties.getProperty(PROPERTIES_ROOT
+						+ PROPERTIES_USER + category + ".channel" + zero + j
+						+ ".excludesKeyword");
+
+				if (title == null)
+					break;
+
+				usesThisChannel = properties.getProperty(
+						PROPERTIES_ROOT + PROPERTIES_USER + category
+								+ ".channel" + zero + j + ".usesThisChannel")
+						.equals("true");
+
+				this.channelTitles.add(title);
+				this.channelLinks.add(link);
+				this.excludeKeywords.add(excludesKeyword);
+				this.usesThisChannel.add(usesThisChannel);
+			}
+			if (category == null)
+				break;
+		}
+	}
+}

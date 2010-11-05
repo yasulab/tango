@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><module>
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<entry-point class="tango.client.Tango"/><inherits name="com.google.gwt.user.User"/>
+
+	<!-- Specify the app entry point class.                   -->
+	
+  
+  	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+  	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
+  	
+	<inherits name="com.google.gwt.widgetideas.GWTCanvas"/><inherits name="com.google.gwt.http.HTTP"/>
+	
+	<stylesheet src="css/format.css"/><servlet class="tango.server.word.PickupWordServiceImpl" path="/pickupWordService"/>
+	<servlet class="tango.server.rss.NewsRankingImpl" path="/newsRanking"/>
+	<servlet class="tango.server.game.GameServiceImpl" path="/morphemeService"/>
+	
+	
+<servlet class="tango.server.canvas.CanvasServiceImpl" path="/canvasService"/><servlet class="tango.server.messenger.MessengerServiceImpl" path="/messenger">
+</servlet></module>

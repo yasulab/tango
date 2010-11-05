@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 element(s) from project &apos;InstantMessenger&apos;&#x0D;&#x0A;- Original project: &apos;InstantMessenger&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     InstantMessenger/src/com.gwtapps.messenger.client&#x0D;&#x0A;     InstantMessenger/src/com.gwtapps.messenger.client.client&#x0D;&#x0A;     com.gwtapps.messenger.client.client.Messenger.java&#x0D;&#x0A;     InstantMessenger/src/com.gwtapps.messenger.client.server" description="Delete elements" element1="/src&lt;com.gwtapps.messenger.client.server" element2="/src&lt;com.gwtapps.messenger.client.client" element3="/src&lt;com.gwtapps.messenger.client" element4="/src&lt;com.gwtapps.messenger" element5="/src&lt;com.gwtapps" element6="/src&lt;com" elements="6" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1234585639187" subPackages="false" version="1.0"/>
+</session>

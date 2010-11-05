@@ -1,0 +1,211 @@
+/*	---CSS INDEX---
+	WordPanel: ポップアップ表示される各パネル。
+	WordPanelTable-panel:"Add Row"や"Add Cell"など。
+	WordPanelTable-table:上部と下部のWordPanelを囲うテーブル(現在は透明なので枠組みが見えない)
+	RelationalWord-label:"★Relative Word"と書かれている部分
+	RelationalWord-checkBox:テキストエリアの左隣にあるチェックボックス
+	RelationalWord-textBox:テキスト入力する部分
+	WordLevel-label:"★Word Level"と書かれている部分
+	WordLevel-easy:"やさしい"と書かれている部分
+	WordLevel-normal:"ふつう"と書かれている部分
+	WordLevel-hard:"むずかしい"と書かれている部分
+	WordClass-label:"★Word Class"と書かれている部分
+	WordClass-noun:"名詞"と書かれている部分
+	WordClass-verb:"動詞"と書かれている部分
+	WordClass-adj:"形容詞"と書かれている部分
+	SettingPanel:画面中央全体を囲う枠組み
+	MainPanel:画面全体を囲う枠組み
+	TangoButton:画面中央のTangoボタン
+	SettingScrollPanel:画面中央のスクロールバー
+	SettingHorizontalPanel:画面中央のスクロールバー内の、各セッティングパネル枠組み
+	WordTable-label:"★Word Table"と書かれている部分
+	WordTable-rowBox:行指定テキストボックス
+	WordTable-colBox:列指定テキストボックス
+	TabPanel:タブパネル
+	RSSTango-main:RSSTangoのメインフレーム
+	RSSNewsPanel:RSSTangoのニュースを表示するフレーム
+	RSSHtmlPanel:RSSTangoのnewsPanelに追加されるニュースのフレーム
+	RSSHtmlPanelHeader:RSSTangoのnewsPanelに追加されるニュースのタイトル部分
+	RSSHtmlPanelBody:RSSTangoのnewsPanelに追加されるニュースの記事部分
+	RSSTitle:RSSTangoのnewsPanelに追加されるニュースのタイトル
+	RSSCategory:RSSTangoのnewsPanelに追加されるニュースのカテゴリ
+	RSSChannelTitle:RSSTangoのnewsPanelに追加されるニュースのチャンネル名
+	RSSDescription:RSSTangoのnewsPanelに追加されるニュースの詳細
+	RSSDate:RSSTangoのnewsPanelに追加されるニュースの更新日時
+	GameTango-main:GameTangoのメインフレーム
+*/
+
+/*
+button { 
+  width:auto; 
+  overflow:visible; 
+}
+button span { 
+  margin-top:1px; 
+}
+button { 
+  border:0; 
+  cursor:pointer; 
+  font-weight:bold; 
+  padding:0 0 0 0; 
+  text-align:center; 
+}
+button span { 
+  position:relative; 
+  display:block; 
+  white-space:nowrap; 
+  padding:0 0 0 0; 
+}
+button.WordPanel { 
+  background:url('./image/btn_blue_right.gif') right no-repeat; 
+  font-size:1.0em; 
+  color: white;
+}
+button.WordPanel span { 
+  height:100px; 
+  line-height:100px;
+  background:url('./image/btn_blue_left.gif') left no-repeat;
+}
+button.WordPanel:hover {
+	background:url('./image/btn_blue_right_hover.gif') right no-repeat; 
+}
+button.WordPanel:hover span {
+	background:url('./image/btn_blue_left_hover.gif') left no-repeat; 
+}
+
+
+.WordPanelTable-panel{
+}
+.WordPanelTable-table{
+}
+*/
+.RelationalWord-label{
+	font-size: x-small;
+	font-weight: bold;
+	color:navy;
+	padding-left:4px;
+	padding-right:4px;
+}
+.RelationalWord-checkBox {}
+.RelationalWord-textBox {}
+
+.WordLevel-label {
+	font-size: x-small;
+	font-weight: bold;
+	color:navy;
+	padding-left:4px;
+	padding-right:4px;
+}
+.WordLevel-easy {}
+.WordLevel-normal {}
+.WordLevel-hard {}
+
+.WordClass-label {
+	font-size: x-small;
+	font-weight: bold;
+	color:navy;
+	padding-left:4px;
+	padding-right:4px;
+}
+.WordClass-noun {}
+.WordClass-verb {}
+.WordClass-adj {}
+
+.SettingPanel{
+	color: #15428b;
+	font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
+.MainPanel {
+	height: 1.7em;
+	margin-bottom: 5px;
+	padding-bottom: 3px;
+	font-size: 12px;
+	font-family: arial, sans-serif;
+}
+
+.TangoButton {
+  display: block;             /* ブロック要素にする */
+  width: 80px;                /* 横幅 */
+  color: #ffffff;
+  background-color: #666699;  /* 背景色 */
+  border: outset 2px #9999cc; /* 枠の色 */
+  margin: 0px;
+  padding: 3px 1px 1px 0px;
+  font-size: 12px;            /* フォントサイズ */
+  line-height: 12px;          /* 行の高さ */
+  text-align: center;         /* 水平揃え */
+  text-decoration: none;      /* 下線を消す */
+}
+.TangoButton:hover {
+  color: #eeeeee;
+  background-color: #555588;  /* 背景色 */
+  border: inset 2px #9999cc;  /* 枠の色 */
+  margin: 0px;
+  padding: 4px 0px 0px 1px;
+}
+.TangoButton:active { color: #ffffff; }
+.TangoButton:visited { color: #ffffff; }
+.SettingScrollPanel {}
+.SettingHorizontalPanel{}
+.Header-description{}
+.Header-logo{}
+.Footer-description{
+  background-color: #339000;;
+}
+
+.WordTable-label{
+	font-size: x-small;
+	font-weight: bold;
+	color:navy;
+	padding-left:4px;
+	padding-right:4px;
+}
+.WordTable-rowBox{}
+.WordTable-colBox{}
+.TabPanel{}
+.RSSTango-main{}
+.RSSNewsPanel{
+	text-align: left;
+}
+.RSSHtmlPanel{
+	float: left;
+	width: 300px;
+	border: solid 2px #666666;
+	margin: 4px;
+}
+.RSSHtmlPanelHeader{
+	font-size: x-small;
+	background-color: #95c0ec
+}
+.RSSHtmlPanelBody{
+	font-size: x-small;
+	margin: 12 0 0 0;
+}
+.RSSTitle{
+	font-weight: bold;
+}
+.RSSCategory{
+	text-align: right;
+}
+.RSSChannelTitle{
+	text-align: right;
+}
+.RSSDescription{}
+.RSSDate{
+	text-align: right;
+}
+.GameTango-main{}
+
+.myContactItem{ background-color:#def; font-weight:bold;}
+			.contactItem td{ padding:5px;}
+			
+			.chatWindow{ border:1px solid #cde; background-color:#FFF; }
+			.chatWindowContent{ padding:5px;}
+			.chatWindowConversation{ border-bottom:1px solid #eee;  }
+			.chatWindowConversation div{ padding-bottom:5px; }
+			.chatWindowInput{ border:2px solid #acf; }
+			.gwtapps-TitleBar{ padding:2px; padding-left:5px; background-color:#def; }
+			.gwtapps-TitleBarTitle{ font-weight:bold; }
+			.gwtapps-TitleBarCommand{ font-size:10px; }
+			.convMessage{ font-size:11px; margin-bottom:5px; }
+.popup{ border:1px solid #CCC; background-color:#FFE; padding:10px;}

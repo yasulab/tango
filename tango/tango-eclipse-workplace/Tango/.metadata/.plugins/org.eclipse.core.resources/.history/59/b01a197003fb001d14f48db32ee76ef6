@@ -1,0 +1,17 @@
+package com.gwtapps.messenger.client;
+
+import java.util.ArrayList;
+
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.Message;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public interface MessengerServiceAsync
+{
+	void signIn( String name, AsyncCallback<?> callback );
+	void signOut(AsyncCallback<?> callback);
+	/**
+	 */
+	void getEvents(AsyncCallback<ArrayList> callback);
+	void sendMessage( Contact to, Message message, AsyncCallback<?> callback );
+}

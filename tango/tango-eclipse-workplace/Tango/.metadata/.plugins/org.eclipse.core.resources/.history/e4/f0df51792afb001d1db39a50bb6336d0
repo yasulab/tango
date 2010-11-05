@@ -1,0 +1,23 @@
+package tango.client.messenger;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+
+/**
+ * @author yasukawa
+ *
+ */
+
+public class Messenger extends Composite{
+	DockPanel mainPanel;
+	
+	public Messenger() {
+		mainPanel = new DockPanel();
+		MessengerServiceClientImpl messengerService = 
+			new MessengerServiceClientImpl( GWT.getModuleBaseURL() + "messenger" );
+		mainPanel.add(messengerService.getView(), DockPanel.CENTER);
+		this.initWidget(mainPanel);
+		RootPanel.get("messengerView").add( messengerService.getView() );
+	}
+}

@@ -1,0 +1,116 @@
+package tango.client;
+	import java.util.ArrayList;
+
+	import com.google.gwt.core.client.EntryPoint;
+	import com.google.gwt.user.client.ui.*;
+	import com.google.gwt.user.client.Window;
+	import com.google.gwt.user.client.WindowResizeListener;
+
+	import tango.client.rss.RSSTangoMain;
+	import tango.client.share.ShareTangoMain;
+	import tango.client.ui.PickupTango;
+	import tango.client.ui.TangoPanel;
+	import tango.client.ui.TangoPanelTable;
+	import tango.client.word.WordTangoMain;
+
+	public class Tango_ex implements EntryPoint ,WindowResizeListener {
+		static final int TANGO_PANEL_HEIGHT = 600;
+		static final int TANGO_PANEL_WIDTH = 120;
+		static final boolean RSS_DEBUG_FLAG = false;
+
+		DockPanel wholePanel = new DockPanel();
+		DockPanel mainPanel = new DockPanel();
+		TabPanel tabPanel = new TabPanel();
+		TabPanel saveTabPanel = new TabPanel();
+		public static TangoPanelTable saveWordTable = new TangoPanelTable();
+		WordTangoMain wordTangoPanel = new WordTangoMain();
+		RSSTangoMain rssTangoPanel;
+		ShareTangoMain gameTangoPanel = new ShareTangoMain();
+		// CanvasTangoMain canvasTangoPanel = new CanvasTangoMain();
+		HeaderPanel headerPanel = new HeaderPanel();
+		FooterPanel footerPanel = new FooterPanel();
+
+		/**
+		 * This is the entry point method.
+		 */
+		public void onModuleLoad() {
+			/* initialize*/
+			rssTangoPanel = new RSSTangoMain(RSS_DEBUG_FLAG);
+			// initialize("./db/wordList.txt");
+
+			/* Display Components */
+			RootPanel.get().add(wholePanel);
+			// RootPanel.get().add(testPanel);
+			wholePanel.add(headerPanel, DockPanel.NORTH);
+			wholePanel.add(mainPanel, DockPanel.CENTER);
+			wholePanel.add(footerPanel, DockPanel.SOUTH);
+			wholePanel.setSize("100%", "100%");
+
+			/* Set size of components */
+			/* (100%,100%) = horizontal and vertical center. */
+			headerPanel.setSize("100%", "0%");
+			mainPanel.setSize("100%",	"0%");	
+			footerPanel.setSize("100%", "0%");
+
+			/* Main Tab Panel Layout */
+			mainPanel.add(tabPanel, DockPanel.NORTH);
+			mainPanel.add(saveTabPanel, DockPanel.CENTER);
+			mainPanel.setCellHorizontalAlignment(tabPanel, DockPanel.ALIGN_CENTER);
+			mainPanel.setCellHorizontalAlignment(saveTabPanel, DockPanel.ALIGN_CENTER);
+
+			/* tabPanel */
+			tabPanel.add(wordTangoPanel, "Word tango!");
+			tabPanel.add(rssTangoPanel, "RSS tango!");
+			tabPanel.add(gameTangoPanel, "Share tango!");
+			// tabPanel.add(canvasTangoPanel, "Canvas tango!");
+			wordTangoPanel.setPixelSize(TANGO_PANEL_HEIGHT, TANGO_PANEL_WIDTH);
+			rssTangoPanel.setPixelSize(TANGO_PANEL_HEIGHT, TANGO_PANEL_WIDTH);
+			gameTangoPanel.setPixelSize(TANGO_PANEL_HEIGHT, TANGO_PANEL_WIDTH);
+			tabPanel.selectTab(2);
+
+			/* saveTabPanel */
+			saveTabPanel.add(saveWordTable, "Saved tango!");
+			saveTabPanel.selectTab(0);
+			// saveWordTable.onBrowserEvent(null);
+			saveWordTable.setPixelSize(650, 50);
+			saveWordTable.clearWordPanel();
+
+			/*DEBUG CODE
+			for(int i=0;i<5;i++){
+				saveWordTable.addWordPanel(new TangoPanel());
+			}
+			//*/
+
+			/* Setting Style Sheet */
+			mainPanel.setStyleName("MainPanel");
+			tabPanel.setStyleName("TabPanel");
+
+			/* Resizing for matching window size */
+			Window.addWindowResizeListener(this);
+			onWindowResized(Window.getClientWidth(), Window.getClientHeight());
+		}
+
+		/* Resizing function to each panel */
+		public void onWindowResized(int width, int height) {
+			//width*ratio
+			tabPanel.setPixelSize((int)(width*0.7)-2, (int) (height * 0.1)-66);
+			saveTabPanel.setPixelSize((int)(width*0.7)-2, (int) (height * 0.1)-66);
+		}
+
+		/* saveWordTableにword panelを保存する */
+		public static void saveWordPanel(TangoPanel wPanel){
+			saveWordTable.addWordPanel(wPanel);
+		}
+
+		/* saveWordTableのcell(row, col)にword panelを保存する */
+		public static void saveWordPanel(int row, int col, TangoPanel wPanel){
+			saveWordTable.addWordPanel(row, col, wPanel);
+		}
+
+		public static ArrayList<PickupTango> getSavedTangoList(){
+			ArrayList<PickupTango> pickupTangoList;
+			pickupTangoList = saveWordTable.toArray();
+			return pickupTangoList;
+		}
+	}
+

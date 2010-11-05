@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="369" key="DIALOG_WIDTH"/>
+		<item value="360" key="DIALOG_Y_ORIGIN"/>
+		<item value="464" key="DIALOG_X_ORIGIN"/>
+		<item value="389" key="DIALOG_HEIGHT"/>
+		<item value="1|メイリオ|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|メイリオ" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="gif" key="selection"/>
+		<list key="findhistory">
+			<item value="gif"/>
+			<item value="Game"/>
+			<item value="Chat"/>
+			<item value="chat"/>
+			<item value="jetty"/>
+		</list>
+		<list key="replacehistory">
+			<item value="Share"/>
+		</list>
+	</section>
+</section>

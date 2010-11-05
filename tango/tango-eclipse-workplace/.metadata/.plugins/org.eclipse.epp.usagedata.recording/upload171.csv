@@ -1,0 +1,17 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.eclipse.team.ui,3.4.1.r34x_20080827,org.eclipse.team.ui,1251324949888
+stopped,bundle,org.eclipse.compare,3.4.1.r34x_20090121,org.eclipse.compare,1251324949888
+stopped,bundle,org.eclipse.ui.externaltools,3.2.0.v20080514-1542,org.eclipse.ui.externaltools,1251324949888
+stopped,bundle,org.eclipse.datatools.sqltools.debugger.core,1.0.0.v200808140615,org.eclipse.datatools.sqltools.debugger.core,1251324949889
+stopped,bundle,org.eclipse.datatools.sqltools.db.derby,1.0.0.v200805152355,org.eclipse.datatools.sqltools.db.derby,1251324949889
+stopped,bundle,org.eclipse.datatools.sqltools.routineeditor,1.0.0.v200807211830,org.eclipse.datatools.sqltools.routineeditor,1251324949889
+stopped,bundle,org.eclipse.datatools.enablement.sybase.ase.ui,1.0.1.v200806260315,org.eclipse.datatools.enablement.sybase.ase.ui,1251324949890
+stopped,bundle,org.eclipse.datatools.enablement.sybase.ase,1.0.1.v200901170012,org.eclipse.datatools.enablement.sybase.ase,1251324949890
+stopped,bundle,org.eclipse.datatools.sqltools.db.generic,1.0.0.v200902031600,org.eclipse.datatools.sqltools.db.generic,1251324949890
+stopped,bundle,org.eclipse.datatools.enablement.sybase.asa.ui,1.0.1.v200805310538,org.eclipse.datatools.enablement.sybase.asa.ui,1251324949891
+stopped,bundle,org.eclipse.datatools.sqltools.tablewizard,1.0.0.v200808140615,org.eclipse.datatools.sqltools.tablewizard,1251324949891
+stopped,bundle,org.eclipse.datatools.sqltools.ddlgen.ui,1.0.0.v200808140615,org.eclipse.datatools.sqltools.ddlgen.ui,1251324949892
+stopped,bundle,org.eclipse.datatools.sqltools.sqlbuilder,1.0.0.v200901280650,org.eclipse.datatools.sqltools.sqlbuilder,1251324949892
+stopped,bundle,org.eclipse.datatools.sqltools.sqlscrapbook,1.0.0.v200901151810,org.eclipse.datatools.sqltools.sqlscrapbook,1251324949893
+stopped,bundle,org.eclipse.datatools.sqltools.sqleditor,1.0.0.v200901220945,org.eclipse.datatools.sqltools.sqleditor,1251324949893
+stopped,bundle,org.eclipse.wst.server.preview.adapter,1.0.101.v20080730,org.eclipse.wst.server.preview.adapter,1251324949896

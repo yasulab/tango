@@ -1,0 +1,250 @@
+package tango.server.rss;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import tango.client.rss.NewsFields;
+import tango.client.rss.RankingFields;
+import tango.client.rss.RankingFieldsComparator;
+
+/**
+ * <p>
+ * 全ニュース情報からランキングを生成します。
+ * </p>
+ * <p>
+ * このクラスではニュースに含まれている名詞を抜き出し、{@link RankingFields}クラスを生成します。<br>
+ * ニュース情報の解析にはYahoo形態素解析を利用しています。このAPIには解析した名詞を頻出順にして並べる機能があるためこれを利用します。
+ * </p>
+ * 
+ * @author Ukit Grey
+ * 
+ */
+public class RankingFieldsFactory {
+	private static final String A_ID = "2.v4Bx6xg678G80n3FTOkE7lNP.Yh1xNFGmJG5ErmadBYLAK9kaiTI8kClDTZA--";
+	private static final String ANALYSIS_ADDRESS = "jlp.yahooapis.jp/MAService/V1/parse";
+	// 一度にAPIに渡すニュースの数。多すぎるとプロキシを通したときに文字数制限に引っかかります。ダイレクトなら50までは可？
+	private static final int NUMBER_OF_ACCESSES = 10;
+	private static final String PROXY_ADDRESS = "www-proxy.waseda.jp";
+	private static final int PROXY_PORT = 8080;
+
+	/**
+	 * このクラスの実質的なコンストラクタです。
+	 * 
+	 * @param usesProxy
+	 *            プロキシを利用するかどうか
+	 * @param collection
+	 *            全ニュースのコレクション
+	 * @return このクラスの初期化されたインスタンス
+	 */
+	public static RankingFieldsFactory newInstance(boolean usesProxy,
+			List<NewsFields> collection) {
+
+		return new RankingFieldsFactory(usesProxy, collection);
+
+	}
+
+	private List<NewsFields> newsFieldsCollection;
+
+	private boolean usesProxy;
+
+	/**
+	 * 基本的には{@link #newInstance(boolean, List)}メソッドを利用してください
+	 * 
+	 * @deprecated
+	 * @param usesProxy
+	 * @param collection
+	 */
+	protected RankingFieldsFactory(boolean usesProxy,
+			List<NewsFields> collection) {
+		this.usesProxy = usesProxy;
+		this.newsFieldsCollection = collection;
+	}
+
+	/**
+	 * <p>
+	 * Yahoo形態素解析に接続します。
+	 * </p>
+	 * 
+	 * @param query
+	 *            解析する文字列
+	 * @return URLのInputStream
+	 * @throws IOException
+	 */
+	private InputStream accessMAService(String query) throws IOException {
+		// UTF-8に変換
+		try {
+			query = URLEncoder.encode(query, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println(e);
+		}
+
+		String directUrl = new String("http://" + ANALYSIS_ADDRESS + "?appid="
+				+ A_ID);
+		directUrl += "&results=uniq";
+		directUrl += "&filter=9";
+		directUrl += "&sentence=" + query;
+
+		URL Url;
+		if (usesProxy)
+			Url = new URL("http", PROXY_ADDRESS, PROXY_PORT, directUrl);
+		else
+			Url = new URL(directUrl);
+
+		URLConnection cn = Url.openConnection();
+		InputStream is = cn.getInputStream();
+
+		return is;
+	}
+
+	/**
+	 * <p>
+	 * ニュースがこのクラスのキーワードを含んでいる場合、このクラスと関連付けます。
+	 * </p>
+	 * 
+	 * @param rankingCollection
+	 *            {@link RankingFields}のコレクション
+	 */
+	private void setNewsFieldsToRankingFields(
+			Set<RankingFields> rankingCollection) {
+		for (NewsFields topic : newsFieldsCollection) {
+			for (RankingFields ranking : rankingCollection) {
+				if (topic.getExcludedTitle().indexOf(ranking.getKeyword()) >= 0)
+					ranking.addNewsFields(topic);
+			}
+		}
+	}
+
+	/**
+	 * <p>
+	 * 前から順番に、順位をつけます。
+	 * </p>
+	 * <p>
+	 * このメソッドが呼び出されるのはランキングが全て作成されてからなので、順位順に並んでいます。<br>
+	 * ランクの情報がついていない状態なので、最終的に前から1,2,・・・と順位をつけます。
+	 * </p>
+	 * 
+	 * @param rankingCollection
+	 */
+	private void setRank(Set<RankingFields> rankingCollection) {
+		int i = 0;
+		for (RankingFields ranking : rankingCollection) {
+			ranking.setRank(i + 1);
+			i++;
+		}
+	}
+
+	/**
+	 * <p>
+	 * 全ニュースから形態素解析を呼び出し名詞を取り出して、全ランキングを生成します。
+	 * </p>
+	 * <p>
+	 * 形態素解析は一辺に全ニュースを解析しようとするとURLの文字数制限に引っかかってしまうため、 何回かに分けて解析を行います。<br>
+	 * 解析したデータはXMLパーサでパースし、名詞（キーワード）と頻出回数を取得、{@link RankingFields}クラスを次々に生成します。
+	 * </p>
+	 * 
+	 * @return 全ランキングのコレクション
+	 * @throws IOException
+	 */
+	protected Set<RankingFields> newAllRankingFieldsCollection()
+			throws IOException {
+
+		Set<RankingFields> collection = new TreeSet<RankingFields>(
+				new RankingFieldsComparator());
+
+		String titles;
+
+		List<Integer> limit = new ArrayList<Integer>();
+		limit.add(newsFieldsCollection.size());
+		int times = (limit.get(0) / NUMBER_OF_ACCESSES);
+		if (limit.get(0) % NUMBER_OF_ACCESSES != 0)
+			times++;
+
+		for (int i = 0; limit.get(i) > NUMBER_OF_ACCESSES; i++) {
+			limit.add(limit.get(i) - NUMBER_OF_ACCESSES);
+			limit.set(i, NUMBER_OF_ACCESSES);
+		}
+
+		for (int i = 0; i < times; i++) {
+			titles = new String();
+			for (int j = 0; j < limit.get(i); j++) {
+				NewsFields topic = newsFieldsCollection.get(j + i
+						* NUMBER_OF_ACCESSES);
+				titles += topic.getExcludedTitle() + "\n";
+			}
+
+			InputStream is = accessMAService(titles);
+
+			try {
+				// XMLパーサにより検索結果を解析
+				DocumentBuilderFactory factory = DocumentBuilderFactory
+						.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document d = builder.parse(is);
+				// ルートノード
+				Element root = d.getDocumentElement();
+				NodeList list = root.getElementsByTagName("uniq_result");
+				root = (Element) list.item(0);
+				list = root.getElementsByTagName("word_list");
+				root = (Element) list.item(0);
+				list = root.getElementsByTagName("word");
+
+				for (int k = 0; k < list.getLength(); k++) {
+					Element element = (Element) list.item(k);
+					// 各フィールドを抽出
+					NodeList cList = element.getElementsByTagName("count");
+					NodeList sList = element.getElementsByTagName("surface");
+					// 各Resultノードの最初のノードを取得
+					Element cElement = (Element) cList.item(0);
+					Element sElement = (Element) sList.item(0);
+					// 各値を取得
+					int count = Integer.parseInt(cElement.getFirstChild()
+							.getNodeValue());
+					String surface = sElement.getFirstChild().getNodeValue();
+
+					RankingFields fields = new RankingFields(count, surface);
+
+					// 　同じsurfaceのフィールドがあれば統合
+					if (!fields.isNumberKeyword())
+						collection.add(fields.combineRankingFields(collection));
+
+				}
+
+			} catch (IOException e) {
+				System.out.println(e);
+			} catch (ParserConfigurationException e) {
+				System.out.println(e);
+			} catch (SAXException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		setRank(collection);
+
+		setNewsFieldsToRankingFields(collection);
+		
+		// debug message
+		System.out.println("NewsRanking got" +collection.size() "Keywords.");
+
+		return new HashSet<RankingFields>(collection);
+//		return collection;
+	}
+}

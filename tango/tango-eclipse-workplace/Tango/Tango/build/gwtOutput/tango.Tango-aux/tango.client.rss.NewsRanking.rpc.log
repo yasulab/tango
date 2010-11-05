@@ -1,0 +1,129 @@
+Reachable types computed on: Tue Feb 17 20:16:57 JST 2009
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.Exception
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.RuntimeException
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.String
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String' is reachable as a subtype of type 'class java.lang.String'
+      Started from 'java.lang.String'
+
+java.lang.String[]
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String[]' is reachable from field 'categories' of type 'tango.client.rss.RSSFields'
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+java.lang.Throwable
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Throwable' is reachable as a supertype of type 'class java.lang.Exception'
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.util.HashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a supertype of type 'class java.util.LinkedHashSet<tango.client.rss.NewsFields>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+java.util.HashSet<tango.client.rss.RankingFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.HashSet<tango.client.rss.RankingFields>' is reachable as a supertype of type 'class java.util.LinkedHashSet<tango.client.rss.RankingFields>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+java.util.LinkedHashSet<tango.client.rss.RankingFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+java.util.LinkedHashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+tango.client.rss.RSSFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+tango.client.rss.RankingFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+
+tango.client.rss.TopicFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.TopicFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable as a subtype of type 'class tango.client.rss.RankingFields'
+      'tango.client.rss.RankingFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.RankingFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.RankingFields>'
+      Started from 'java.util.Set<tango.client.rss.RankingFields>'
+

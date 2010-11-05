@@ -1,0 +1,26 @@
+1234662685000	Delete element
+1234663083328	Copy compilation unit
+1234663149875	Copy compilation units
+1234663183171	Copy compilation units
+1234663213281	Copy compilation units
+1234663270640	Copy compilation units
+1234663332218	Delete element
+1234673981828	Move compilation unit
+1234674145203	Delete elements
+1234674198125	Move file
+1234674239187	Delete element
+1234693555250	Rename package 'tango.server.game'
+1234693569562	Rename package 'tango.client.game'
+1234693694093	Rename type 'GameService'
+1234693705140	Rename type 'GameServiceAsync'
+1234693714531	Rename type 'GameTangoMain'
+1234694012203	Rename type 'GameServiceImpl'
+1234715891765	Encapsulate field 'tangoPanel'
+1234717534687	Encapsulate field 'pickupTangos'
+1234753393812	Rename type 'ShareTangoEvent'
+1234757632140	Rename type 'ShareWindowView'
+1234758424796	Rename type 'ShareTangoView'
+1234788597687	Rename type 'ShareTangoRefreshEvent'
+1234814008550	Change method 'initialize'
+1234814061695	Change method 'initialize'
+1234834320093	Move compilation units

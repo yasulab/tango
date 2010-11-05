@@ -1,0 +1,146 @@
+package tango.client.messenger;
+
+import java.util.ArrayList;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.RootPanel;
+
+import tango.client.Tango;
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.ContactList;
+import tango.client.messenger.model.Message;
+import tango.client.messenger.view.MessengerView;
+import tango.client.messenger.view.MessengerViewListener;
+import tango.client.ui.PickupTango;
+import tango.client.ui.TangoPanel;
+
+public class MessengerServiceClientImpl implements MessengerViewListener{
+	
+	private class SignInCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error sign in",throwable); }
+		public void onSuccess(Object obj){
+			System.out.println("SignInCallback in MessengerServiceClientImpl has started!");
+			view.setContactList( contactList );
+			
+			// !!NEW!!
+			view.setShareTangoWindow();
+			messengerService.getEvents( new GetEventsCallback() );
+		}
+	}
+	
+	private class EmptyCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error",throwable); }
+		public void onSuccess(Object obj){}
+	}	
+	
+	private class GetEventsCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error get events",throwable); }
+		public void onSuccess(Object obj){
+			ArrayList events = (ArrayList)obj;
+			for( int i=0; i< events.size(); ++i ){
+				Object event = events.get(i);	// Event取得
+				handleEvent( event );			// Event処理
+			}
+			messengerService.getEvents( this );
+		}
+	}
+
+	private MessengerServiceAsync messengerService;
+	private ContactList contactList;
+	private MessengerView view = new MessengerView( this );
+	
+	/* EntryPointのservice URIを宣言する */
+	public MessengerServiceClientImpl( String URL ){
+		messengerService = (MessengerServiceAsync) GWT.create( MessengerService.class );
+		ServiceDefTarget endpoint = (ServiceDefTarget) messengerService;
+		endpoint.setServiceEntryPoint( URL );		
+	}
+
+	public MessengerView getView(){
+		return view;
+	}
+
+	/* サインイン・サインアウト・メッセージ送信のInterfaceの実装 
+	 * サーバからの通知に従い、該当した関数が呼び出される。
+	 * その後、再びサーバーとの通信を始める。
+	 */
+	// サインインしたときに呼び出される（最初）
+	public void onSignIn( String name, ArrayList<PickupTango> pickupTangoList ){
+		System.out.println("onSignIn() in MessengerServiceClientImpl has started!");
+		contactList = new ContactList( name );
+		messengerService.signIn( name, pickupTangoList, new SignInCallback() );
+	}
+	public void onSignOut(){
+		System.out.println("onSignOut() in MessengerServiceClientImpl has started!");
+		messengerService.signOut( new EmptyCallback() );
+	}	
+	public void onSendMessage( Contact toContact, Message message ){
+		System.out.println("onSendMessage() in MessengerServiceClientImpl has started!");
+		messengerService.sendMessage( toContact, message, new EmptyCallback() );
+	}
+	public void onSendSavedTango(PickupTango pickupTango) {
+		System.out.println("onSendSavedTango() in MessengerServiceClientImpl has started!");
+		messengerService.sendSavedTango(pickupTango, new EmptyCallback());
+	}  
+	public void onSendSavedTangoList(ArrayList<PickupTango> pickupTangoList) {
+		System.out.println("onSendSavedTangoList() in MessengerServiceClientImpl has started!");
+		messengerService.sendSavedTangoList(pickupTangoList, new EmptyCallback());
+	}
+	
+
+	/*Eventの取り扱い機構*/
+	protected void handleEvent( Object event ){
+		// メッセージ送信Eventの場合
+		if( event instanceof SendMessageEvent ){	
+			SendMessageEvent sendMessageEvent = (SendMessageEvent)event;
+			view.getChatWindowView( sendMessageEvent.sender ).addMessage( sendMessageEvent.message );
+		}
+		// サインインEventの場合
+		else if( event instanceof SignOnEvent ){
+			SignOnEvent signOnEvent = (SignOnEvent)event;
+			contactList.addContact(signOnEvent.contact);
+			view.getContactListView().addContact(signOnEvent.contact);
+			
+			
+			/**** NEW ****/
+			//signOnEvent.savedTangoList = Tango.getSavedTangoList();
+			//view.getShareTangoView().addPickupTangoList(signOnEvent.savedTangoList);
+			//SignOnEvent signOnEvent_clone = this.cloneSignOnEvent(signOnEvent);
+			//contactList.addContact(signOnEvent_clone.contact);
+			//view.getContactListView().addContact(signOnEvent_clone.contact);
+		}
+		// サインアウトEventの場合
+		else if( event instanceof SignOffEvent ){
+			SignOffEvent signOffEvent = (SignOffEvent)event;
+			contactList.removeContact(signOffEvent.contact);
+			view.getContactListView().removeContact(signOffEvent.contact);
+		}
+		// SavedTango送信Eventの場合
+		else if( event instanceof SendSavedTangoEvent){
+			System.out.println("SendSavedTangoEvent in MessengerServiceClientImpl has started!");
+			SendSavedTangoEvent saveEvent = (SendSavedTangoEvent)event;
+			if(saveEvent.isList==true){
+				view.getShareTangoView().addPickupTangoList(saveEvent.pickupTangoList);
+			}else{
+				view.getShareTangoView().addPickupTangoList(saveEvent.pickupTango);
+			}
+		}
+	}
+	
+	/**
+	 * 複数のPickupTangoのリストを一つにまとめる。
+	 * @param arrayList
+	 * @return
+	 */
+	public ArrayList<PickupTango> convergeArray(ArrayList<ArrayList<PickupTango>> arrayList) {
+		ArrayList<PickupTango> tangoArray = new ArrayList<PickupTango>();
+		
+		for(int i=0; i<arrayList.size(); i++){
+			tangoArray.addAll(arrayList.get(i));
+		}
+		
+		return tangoArray;
+	}
+}

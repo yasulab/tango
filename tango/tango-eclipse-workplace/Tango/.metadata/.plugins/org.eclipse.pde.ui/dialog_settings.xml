@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="pde-form-editor">
+		<item value="build-context" key="org.eclipse.pde.ui.buildEditor"/>
+		<item value="feature" key="org.eclipse.pde.ui.featureEditor"/>
+	</section>
+</section>

@@ -1,0 +1,178 @@
+package tango.server.messenger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.gwt.user.client.Event;
+
+import tango.client.messenger.MessengerService;
+import tango.client.messenger.SendMessageEvent;
+import tango.client.messenger.SignOffEvent;
+import tango.client.messenger.SignOnEvent;
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+
+public abstract class AbstractMessengerService implements MessengerService {
+	
+	protected static final int MAX_MESSAGE_LENGTH = 256;
+	protected static final int MAX_NAME_LENGTH = 10;
+	
+	protected class UserInfo{
+		Contact contact;
+		String id;
+		ArrayList<SignOnEvent> events = new ArrayList<SignOnEvent>();
+	}	
+	private Map users = new HashMap();
+	
+	public abstract String getCurrentId();
+	public abstract void onEvents( String id );
+	
+	public void signIn( String name ){		
+		//adjust name
+		name = cleanString( name, MAX_NAME_LENGTH );		
+
+		//add user to list
+		String id = getCurrentId();
+		UserInfo user = new UserInfo();
+		user.contact = new Contact( name );
+		user.id = id;
+		//clear events
+		onEvents( user.id );
+		signOut();
+		synchronized( this ){
+			users.put( id, user );
+		}
+		
+		//create sign on event
+		SignOnEvent event = new SignOnEvent();
+		event.contact = user.contact;
+		broadcastEvent( event, user );
+		
+		//add sign on events for current contact list
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); )
+			{
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp != user )
+				{
+					SignOnEvent eventTemp = new SignOnEvent();
+					eventTemp.contact = userTemp.contact;
+					user.events.add( eventTemp );
+				}
+			}
+		}
+		onEvents( user.id );
+	}
+	
+	public void signOut(){
+		//remove user from list
+		Contact contact;
+		String id = getCurrentId();
+		if( users.containsKey(id)){
+			
+			synchronized( this ){
+				UserInfo user = (UserInfo)users.get(id);
+				contact = user.contact;
+				users.remove(id);
+			}
+			
+			//create sign off event
+			SignOffEvent event = new SignOffEvent();
+			event.contact = contact;
+			broadcastEvent( event, null );
+		}
+	}
+	
+	public boolean hasEvents(){
+		UserInfo user = getCurrentUser();
+		if( user == null )
+			return false;
+		return user.events.size() > 0;
+	}
+	
+	public ArrayList getEvents(){
+		ArrayList events = null;
+		UserInfo user = getCurrentUser();
+		if( user != null  && user.events.size() > 0){
+			synchronized( user ){
+				events = user.events;
+				user.events = new ArrayList();
+			}
+		}
+		return events;
+	}
+	
+	public void sendMessage( Contact to, Message message ){
+		//adjust message
+		String cleanMessage = cleanString( message.toString(), MAX_MESSAGE_LENGTH );
+		
+		//get sender and receiver
+		UserInfo sender = getCurrentUser();
+		UserInfo receiver = getUserByName( to.getName() );
+		
+		if( receiver != null ){
+			
+			//create event
+			SendMessageEvent event = new SendMessageEvent();
+			event.sender = sender.contact;
+			event.message = new Message( cleanMessage );
+			
+			//send event to receiver
+			synchronized( receiver )
+			{
+				receiver.events.add( event );
+				onEvents( receiver.id );
+			}
+		}
+	}
+	
+	protected void broadcastEvent( Object event, UserInfo except ){
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo user = (UserInfo)entry.getValue();
+				if( user != except ){
+					synchronized( user ){
+						user.events.add( event );
+						onEvents( user.id );
+					}
+				}
+			}
+		}
+	}
+	
+	protected UserInfo getCurrentUser(){
+		String id = getCurrentId();
+		synchronized( this ){
+			return (UserInfo)users.get(id);
+		}
+	}	
+	
+	protected UserInfo getUserByName( String name ){
+		UserInfo user = null;
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext() && user == null; ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp.contact.getName().compareTo(name) == 0 )
+					user = userTemp;
+			}
+		}
+		return user;
+	}
+	
+	protected String cleanString( String value, int maxLength ){
+		value = value.trim();
+		if( value.length() > maxLength )
+			value = value.substring(0,maxLength);
+		value = value.replaceAll("\\<.*?\\>","");
+		return value;
+	}
+}

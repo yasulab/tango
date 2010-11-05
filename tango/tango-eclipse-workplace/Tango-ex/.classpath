@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (2)"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT (1)"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/yohei/library/gwt-incubator-march-02-2009.jar"/>
+	<classpathentry kind="lib" path="/home/yohei/library/jetty-util-6.1.6.jar"/>
+	<classpathentry kind="lib" path="/home/yohei/library/catalina/catalina.jar"/>
+	<classpathentry kind="con" path="DERBY_CONTAINER"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

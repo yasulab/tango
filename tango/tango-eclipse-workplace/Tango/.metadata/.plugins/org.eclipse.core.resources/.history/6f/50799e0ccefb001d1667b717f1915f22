@@ -1,0 +1,16 @@
+package tango.client.messenger.view;
+
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+
+/**
+ * @author yasukawa
+ * MessengerViewクラスを作るために必要。
+ * 今とロ0らはこのクラスを実装してインタフェースイベントを受け取る。
+ */
+public interface MessengerViewListener 
+{
+	void onSignIn( String name );
+	void onSignOut();
+	void onSendMessage( Contact toContact, Message message );
+}

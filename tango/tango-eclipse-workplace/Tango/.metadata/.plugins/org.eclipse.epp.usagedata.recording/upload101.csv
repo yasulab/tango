@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662556375
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234662579671
+opened,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662583625
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662583656
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662586343
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662588890
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662590265
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662592031
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662595390
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662608562
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662614187
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662615562
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662618375
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1234662618875
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662620687
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662626359
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662631875
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662633906
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662635406
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662637343
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1234662637796
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234662642484
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662651031
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662652937
+opened,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662662343

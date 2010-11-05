@@ -1,0 +1,160 @@
+package tango.client.rss;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import tango.client.ui.TangoPanel;
+import tango.client.ui.TangoPanelTable;
+
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.SourcesTableEvents;
+import com.google.gwt.user.client.ui.TableListener;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+/**
+ * <p>
+ * {@link TangoPanelTable}をRSS用に拡張したクラスです。
+ * </p>
+ * 
+ * @author Ukit Grey
+ * 
+ */
+public class RSSPanelTable extends TangoPanelTable {
+	VerticalPanel panel = new VerticalPanel();
+	FlexTable flexTable;
+	int randomNumber;
+
+	/* DefaultのConstructor */
+	public RSSPanelTable() {
+		//super("null");
+		HorizontalPanel buttons = new HorizontalPanel();
+		panel.add(buttons);
+		panel.setCellHorizontalAlignment(buttons, VerticalPanel.ALIGN_CENTER);
+		flexTable = new FlexTable();
+		flexTable.setSize("100%", "100%");
+		panel.add(flexTable);
+		flexTable.addStyleName("WordPanelTable-table");
+		flexTable.addStyleName("WordPanelTable-panel");
+
+		/* セルがクリックされた時の振る舞い */
+		flexTable.addTableListener(new TableListener() {
+			public void onCellClicked(SourcesTableEvents sender, int row,
+					int cell) {
+				System.out.println("row=" + row + ", cell=" + cell);
+			}
+		});
+
+		flexTable.setWidget(0, 0, new RSSPanel());
+		initWidget(panel);
+
+	}
+
+	/* flex tableの中身を消去する */
+	public void clearWordPanel() {
+		this.flexTable.clear();
+	}
+
+	/* 行列(row×col)のflex tableを再生成する */
+	public void changeReflect(int row, int col) {
+		panel.remove(flexTable);
+		flexTable = new FlexTable();
+		panel.add(flexTable);
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				this.flexTable.setWidget(i, j, new RSSPanel());
+			}
+		}
+		flexTable.setSize("100%", "100%");
+	}
+
+	/* saveWordTableの最上段の右端にWord Panelを保存する */
+	public void addWordPanel(TangoPanel wpanel) {
+		int row = 0, col;
+		infillSpaces(row); // セルを左詰めする
+		col = searchNullSpace(row); // 右端のセルに保存
+		flexTable.setWidget(row, col, wpanel);
+	}
+
+	/* 引数で与えられた行の空白セルを左詰めする */
+	private void infillSpaces(int row) {
+		int col, tempCol;
+		// int test;
+		boolean infillFlag;
+		for (col = 0; this.flexTable.isCellPresent(row, col) == true; col++) {
+			infillFlag = false;
+			// System.out.println("("+row+","+col+") isCellPresent");
+
+			/* セルが空白ではない場合 */
+			if (!(this.flexTable.getHTML(row, col).equals(""))) {
+				// System.out.println("("+row+","+col+") has some HTML");
+
+				/* セルが空白だった場合 */
+			} else {
+				// System.out.println("("+row+","+col+") has no HTML");
+				tempCol = col;
+				/* 左詰めする */
+				for (; this.flexTable.isCellPresent(row, tempCol + 1) == true; tempCol++) {
+					infillFlag = true;
+					// test = tempCol+1;
+					// System.out.println("("+row+","+tempCol+") <-- "+"("+row+","+test+")"
+					// );
+					this.flexTable.setWidget(row, tempCol, this.flexTable
+							.getWidget(row, tempCol + 1));
+				}
+				if (infillFlag == true) {
+					this.flexTable.removeCell(row, tempCol);
+					col--; // 左詰めしたので、もう一度同じ行からチェックする
+				}
+			}
+		}
+		// System.out.println("("+row+","+col+") isCellAbsent");
+	}
+
+	/* 引数で与えられた行において、空白セルを探し、その列を返す。 */
+	private int searchNullSpace(int row) {
+		int col = 0;
+		while (this.flexTable.isCellPresent(row, col) == true
+				&& !(this.flexTable.getHTML(row, col).equals(""))) {
+			// System.out.println("("+row+","+col+")==true");
+			System.out.println(this.flexTable.getHTML(row, col));
+			col++;
+		}
+		// System.out.println("("+row+","+col+")==false");
+		return col;
+	}
+
+	/* flexTableの指定した箇所にWord Panelを保存する */
+	public void addWordPanel(int row, int col, TangoPanel wpanel) {
+		System.out.println("func:saveWordPanel");
+		System.out.println("row=" + row + ", col=" + col);
+		flexTable.setWidget(row, col, wpanel);
+	}
+
+	/* tango!ボタンを押したときに、必要に応じて単語をシャッフルする */
+	public void shuffle(Set<RankingFields> rankingCollection) {
+		List<RankingFields> collection = new ArrayList<RankingFields>(
+				rankingCollection);
+		int row = this.flexTable.getRowCount(); // 行数
+		int col = this.flexTable.getCellCount(row - 1); // 列数
+		int listSize = collection.size();
+		panel.remove(flexTable);
+		flexTable = new FlexTable();
+		panel.add(flexTable);
+
+
+		// Window.alert("row="+row +", col="+col + ", listSize=" + listSize
+		// + "\n row * col > listSize");
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				randomNumber = (int) (Math.random() * listSize);
+				flexTable.setWidget(i, j, new RSSPanel(collection
+						.get(randomNumber)));
+				// System.out.println("i="+i+", j="+j);
+			}
+		}
+			
+		flexTable.setSize("100%", "100%");
+	}
+}

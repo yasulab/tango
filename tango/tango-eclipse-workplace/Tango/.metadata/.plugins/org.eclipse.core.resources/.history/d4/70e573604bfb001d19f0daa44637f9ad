@@ -1,0 +1,6 @@
+package tango.client.share;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public interface GameServiceAsync {
+	public void gameService(String msg, AsyncCallback<String> callback);
+}

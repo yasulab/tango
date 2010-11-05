@@ -1,0 +1,156 @@
+package tango.client.messenger.view;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.HistoryListener;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowCloseListener;
+import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DeckPanel;
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.ContactList;
+import tango.client.share.ShareTangoMain;
+import tango.client.ui.PickupTango;
+
+/**
+ * @author yasukawa
+ * アプリケーションのメインビュー。Chat Windowを管理し、ブラウザの右下のそれらを配置する。
+ * SignInViewインスタンスとContactListViewインスタンスを表示し、コントローラからのメッセージの応答する。
+ */
+public class MessengerView extends Composite implements WindowCloseListener, WindowResizeListener, HistoryListener{
+	
+	private DeckPanel mainPanel = new DeckPanel();
+	private ContactListView contactListView;
+	private SignInView signIn;
+	private ContactList contactList;
+	private List openChatWindows = new ArrayList();
+	private ShareTangoWindowView shareTangoWindow;
+	private Map allChatWindows = new HashMap();
+	
+	private static MessengerViewListener listener;
+	private boolean isShareWindowOpen = false;
+	
+	
+	// Define Constructor with some MessengerViewListener
+	public MessengerView( MessengerViewListener listener ){
+		initWidget( mainPanel );
+		this.listener = listener;
+		
+		signIn = new SignInView( this );
+		
+		mainPanel.add( signIn );
+		mainPanel.showWidget(0);
+		
+		Window.addWindowCloseListener(this);
+		Window.addWindowResizeListener(this);
+		History.addHistoryListener(this);
+	}
+	
+	// Get View Listener of MessengerView
+	public static MessengerViewListener getListener(){
+		return listener;
+	}
+	
+	public ContactListView getContactListView(){
+		return contactListView;
+	}
+	
+	public ContactList getContactList(){
+		return contactList;
+	}
+	
+	public void setContactList( ContactList contactList ){
+		this.contactList = contactList;
+		if( contactListView == null ){
+			contactListView = new ContactListView( this );
+			mainPanel.add( contactListView );
+		}
+		mainPanel.showWidget(1);
+	}
+	
+	// Windowを閉じたときに呼び出される関数
+	public void onWindowClosed(){}
+	
+	public String onWindowClosing(){
+		listener.onSignOut();
+		return null;
+	}
+	
+	// Windowがリサイズされたときに呼び出される関数
+	public void onWindowResized( int width, int height ){
+		resetChatWindowPositions();
+	}
+	
+	// ChatWindowを取得する関数
+	@SuppressWarnings("unchecked")
+	public ChatWindowView getChatWindowView( Contact contact ){
+		ChatWindowView chatWindow = (ChatWindowView)allChatWindows.get( contact.getName() );
+		if( chatWindow == null ){
+			chatWindow = new ChatWindowView( this, contact );
+			allChatWindows.put( contact.getName(), chatWindow );
+		}
+		if( chatWindow.position == -1 ){
+			chatWindow.position = openChatWindows.size();
+			openChatWindows.add( chatWindow );
+		}
+		chatWindow.show();	
+		return chatWindow;		
+	}
+	
+	// ChatWindowを閉じたときに呼び出される関数
+	public void closeChatWindow( ChatWindowView windowToClose ){
+		openChatWindows.remove( windowToClose.position );		
+		windowToClose.setVisible(false);
+		windowToClose.position = -1;
+		resetChatWindowPositions();
+	}
+	
+	// ChatWindowの位置情報をリセットする関数
+	protected void resetChatWindowPositions(){
+		for( int i=0; i< openChatWindows.size(); ++i ){
+			ChatWindowView chatWindow = (ChatWindowView)openChatWindows.get(i);
+			chatWindow.setPosition(i);
+		}
+	}
+	
+	// 履歴情報が更新されたときに呼び出される関数(?)
+	public void onHistoryChanged( String historyToken ) {
+		Contact contact = contactList.getContact( historyToken );
+		if( contact != null ){
+			getChatWindowView( contact );
+		}
+	}
+	
+	/*********************************/
+	/*******SHARE TANGO functions*****/
+	/*********************************/
+	// ShareTangoWindowをセットする関数
+	public void setShareTangoWindow(){
+		shareTangoWindow = new ShareTangoWindowView(this);
+		ShareTangoMain.setShareTangoWindow( shareTangoWindow );
+		this.getShareTangoView().show();
+	}
+	
+	// ShareTangoWindowを取得する関数
+	public ShareTangoWindowView getShareTangoView(){
+		return shareTangoWindow;
+	}
+	
+	// ShareTangoWindowを閉じたときに呼び出される関数
+	public void closeShareTangoWindow(){
+		shareTangoWindow.removeFromParent();		
+		shareTangoWindow.setVisible(false);
+	}
+	
+	
+	/* セーブ毎に呼び出される */
+	public static void saveShareTangoWindow(PickupTango pickupTango){
+		if()
+		getListener().onSendSavedTango(pickupTango);
+	}
+}

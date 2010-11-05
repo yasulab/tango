@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427136670
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.delete,1252427138645
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427138672
+activated,editor,com.google.gwt.eclipse.core,1.1.0.v200907291609,com.google.gwt.eclipse.core.editors.gwtJavaEditor,1252427141660
+started,bundle,org.eclipse.pde.core,3.4.0.v20080903-1700,org.eclipse.pde.core,1252427148578
+executed,command,org.eclipse.ui.workbench.texteditor,3.4.1.r341_v20080827-1100,org.eclipse.ui.edit.text.delete.line,1252427148784
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1252427149606
+activated,view,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.PackageExplorer,1252427151428
+activated,editor,com.google.gwt.eclipse.core,1.1.0.v200907291609,com.google.gwt.eclipse.core.editors.gwtJavaEditor,1252427151619
+executed,command,org.eclipse.ui.workbench.texteditor,3.4.1.r341_v20080827-1100,org.eclipse.ui.edit.text.delete.line,1252427153482
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1252427153915
+activated,view,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.PackageExplorer,1252427155434
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427156849
+closed,editor,com.google.gwt.eclipse.core,1.1.0.v200907291609,com.google.gwt.eclipse.core.editors.gwtJavaEditor,1252427157829
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.delete,1252427158111
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427158147
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427163504
+closed,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1252427166159
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.delete,1252427166389
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427166405
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1252427167398
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.delete,1252427183925
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1252427191477
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427194376
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1252427196088

@@ -1,0 +1,9 @@
+package tango.client.messenger;
+
+import java.util.ArrayList;
+
+import tango.client.ui.PickupTango;
+
+public class ShareTangoRefreshEvent extends Event{
+	public ArrayList<ArrayList<PickupTango>> shareTangoList;
+}

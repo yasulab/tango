@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.sun.jndi.toolkit.ctx.Continuation"/>
+<fullyQualifiedTypeName name="sun.org.mozilla.javascript.internal.continuations.Continuation"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Composite"/>
+<fullyQualifiedTypeName name="com.gwtapps.messenger.client.Messenger"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HTMLPanel"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.RootPanel"/>
+<fullyQualifiedTypeName name="com.google.gwt.core.client.EntryPoint"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.DockPanel"/>
+<fullyQualifiedTypeName name="tango.client.messenger.view.ChatWindowView"/>
+<fullyQualifiedTypeName name="tango.client.share.ShareTangoMain"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HorizontalPanel"/>
+<fullyQualifiedTypeName name="tango.client.ui.TangoPanel"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="tango.client.ui.PickupTango"/>
+<fullyQualifiedTypeName name="tango.client.Tango"/>
+<fullyQualifiedTypeName name="tango.client.rss.RankingFields"/>
+<fullyQualifiedTypeName name="tango.client.rss.NewsFields"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
+<fullyQualifiedTypeName name="tango.client.messenger.view.MessengerView"/>
+</qualifiedTypeNameHistroy>

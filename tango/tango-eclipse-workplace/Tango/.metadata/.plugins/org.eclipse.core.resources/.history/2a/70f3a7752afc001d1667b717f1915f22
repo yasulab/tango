@@ -1,0 +1,21 @@
+package tango.client.messenger.view;
+
+import java.util.ArrayList;
+
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+import tango.client.ui.PickupTango;
+
+/**
+ * @author yasukawa
+ * MessengerViewクラスを作るために必要。
+ * 今とロ0らはこのクラスを実装してインタフェースイベントを受け取る。
+ */
+public interface MessengerViewListener 
+{
+	void onSignIn( String name, ArrayList<PickupTango> pickupTangoList);
+	void onSignOut();
+	void onSendMessage( Contact toContact, Message message );
+	void onSendSavedTango(PickupTango pickupTango);
+	void onSendSavedTangoList(ArrayList<PickupTango> pickupTangoList);
+}

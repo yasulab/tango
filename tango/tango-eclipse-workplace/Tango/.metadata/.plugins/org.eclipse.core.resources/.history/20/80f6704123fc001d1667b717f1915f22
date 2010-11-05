@@ -1,0 +1,166 @@
+package tango.server.messenger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.mortbay.util.ajax.Continuation;
+import org.mortbay.util.ajax.ContinuationSupport;
+
+import tango.client.ui.PickupTango;
+
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.server.rpc.RPC;
+import com.google.gwt.user.server.rpc.RPCRequest;
+
+public class MessengerServiceContinuationsImpl extends HttpServlet {
+	
+	class ContinuationsMessengerService extends AbstractMessengerService{
+		final ThreadLocal perThreadRequest = new ThreadLocal();
+		public String getCurrentId() {
+			return ((HttpServletRequest)perThreadRequest.get()).getSession(true).getId();
+		}
+		
+		public void onEvents(String id) {
+			synchronized(pendingRequests){
+				Continuation c = (Continuation)pendingRequests.get( id );
+				if( c != null ){
+					pendingRequests.remove(id);
+					c.resume();
+				}
+			}
+		}
+		
+		public ArrayList getEvents(){
+			ArrayList events = null;
+			UserInfo user = getCurrentUser();
+			if( user != null  ){ 
+				if( user.events.size() == 0){ 
+					Continuation continuation = 
+		            ContinuationSupport.getContinuation(((HttpServletRequest)perThreadRequest.get()),this);
+					pendingRequests.put(user.id,continuation);
+		           continuation.suspend(30000);
+				}
+				synchronized( user ){
+					events = user.events;
+					user.events = new ArrayList();
+				}
+			}
+			return events;
+		}
+
+		public void sendSavedTango(PickupTango pickupTango) {
+			// TODO Auto-generated method stub
+			System.out.println("sendSavedTango in MessengerServiceContinuationImpl");
+			
+		}
+
+		public void sendSavedTangoList(ArrayList<PickupTango> pickupTangoList) {
+			// TODO Auto-generated method stub
+			System.out.println("sendSavedTangoList in MessengerServiceContinuationImpl");
+		}
+
+		@Override
+		public ArrayList<ArrayList<PickupTango>> getAllSavedTangoList() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	
+	Map pendingRequests = new HashMap();
+	ContinuationsMessengerService messengerService = new ContinuationsMessengerService();
+	
+	public void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) 
+	   throws ServletException, IOException {
+
+		//get the payload
+		String payload=(String)httpRequest.getAttribute("payload");
+		if (payload==null){
+			payload = readPayloadAsUtf8(httpRequest);
+			httpRequest.setAttribute("payload",payload);
+		}
+
+		try {
+			try {
+				//make the RPC call
+				RPCRequest rpcRequest = RPC.decodeRequest(payload);
+				messengerService.perThreadRequest.set( httpRequest );
+				String result = RPC.invokeAndEncodeResponse(messengerService, rpcRequest.getMethod(), rpcRequest.getParameters());
+				writeResponse(httpResponse, result);
+			} catch (IncompatibleRemoteServiceException e) {
+				writeResponse(httpResponse, RPC.encodeResponseForFailure(null, e) );
+			} 
+		} catch (Throwable e) {
+			if (e instanceof RuntimeException && "org.mortbay.jetty.RetryRequest" .equals(e.getClass().getName())){
+				throw (RuntimeException) e;
+			}
+		}
+	}
+	
+	private static String readPayloadAsUtf8(HttpServletRequest request)
+	throws IOException, ServletException {
+		int contentLength = request.getContentLength();
+		if (contentLength == -1) {
+			// Content length must be known.
+			throw new ServletException("Content-Length must be specified");
+		}
+
+		String contentType = request.getContentType();
+		boolean contentTypeIsOkay = false;
+		// Content-Type must be specified.
+		if (contentType != null) {
+			// The type must be plain text.
+			if (contentType.startsWith("text/plain")) {
+				// And it must be UTF-8 encoded (or unspecified, in which case we assume
+				// that it's either UTF-8 or ASCII).
+				if (contentType.indexOf("charset=") == -1) {
+					contentTypeIsOkay = true;
+				} else if (contentType.indexOf("charset=utf-8") != -1) {
+					contentTypeIsOkay = true;
+				}
+			}
+		}
+		if (!contentTypeIsOkay) {
+			throw new ServletException(
+					"Content-Type must be 'text/plain' with 'charset=utf-8' (or unspecified charset)");
+		}
+		InputStream in = request.getInputStream();
+		try {
+			byte[] payload = new byte[contentLength];
+			int offset = 0;
+			int len = contentLength;
+			int byteCount;
+			while (offset < contentLength) {
+				byteCount = in.read(payload, offset, len);
+				if (byteCount == -1) {
+					throw new ServletException("Client did not send " + contentLength
+							+ " bytes as expected");
+				}
+				offset += byteCount;
+				len -= byteCount;
+			}
+			return new String(payload, "UTF-8");
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+	}
+	public void writeResponse( HttpServletResponse response, String body ){
+		try {
+            PrintWriter writer = response.getWriter();
+            writer.print(body);
+            writer.flush();
+        } catch (IOException e) {
+            log("IOExeption sending response", e);
+        }
+	}
+}

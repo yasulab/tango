@@ -1,0 +1,5 @@
+package com.gwtapps.client.ui;
+
+public class TitleCommandbar {
+
+}

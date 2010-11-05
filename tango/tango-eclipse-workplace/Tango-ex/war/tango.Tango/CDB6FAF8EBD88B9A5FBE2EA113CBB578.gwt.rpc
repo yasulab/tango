@@ -1,0 +1,14 @@
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true
+java.lang.Boolean, true
+java.lang.Exception, false
+java.lang.RuntimeException, false
+java.lang.String, true
+[Ljava.lang.String;, true
+java.lang.Throwable, false
+java.util.HashSet, true
+java.util.LinkedHashSet, true
+java.util.TreeMap, true
+java.util.TreeSet, true
+tango.client.rss.RSSFields, true
+tango.client.rss.RankingFields, true
+tango.client.rss.TopicFields, true

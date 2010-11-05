@@ -1,0 +1,16 @@
+package com.gwtapps.messenger.client.view;
+
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.Message;
+
+/**
+ * @author yasukawa
+ * MessengerViewクラスを作るために必要。
+ * 今とロ0らはこのクラスを実装してインタフェースイベントを受け取る。
+ */
+public interface MessengerViewListener 
+{
+	void onSignIn( String name );
+	void onSignOut();
+	void onSendMessage( Contact toContact, Message message );
+}

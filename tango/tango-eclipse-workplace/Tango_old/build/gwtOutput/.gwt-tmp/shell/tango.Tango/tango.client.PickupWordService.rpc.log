@@ -1,0 +1,222 @@
+Reachable types computed on: Tue Dec 02 22:41:26 JST 2008
+com.google.gwt.http.client.RequestException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.http.client.RequestException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+com.google.gwt.user.client.rpc.InvocationException
+   Serialization status
+      Field serializable
+   Path
+      'com.google.gwt.user.client.rpc.InvocationException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException'
+      'com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.SerializableException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.SerializableException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.SerializationException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.SerializationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArithmeticException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArithmeticException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArrayIndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArrayIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArrayStoreException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArrayStoreException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ClassCastException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ClassCastException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.Exception
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.IllegalArgumentException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IllegalArgumentException' is reachable as a supertype of type 'class java.lang.NumberFormatException'
+      'java.lang.NumberFormatException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.IllegalStateException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IllegalStateException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.IndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IndexOutOfBoundsException' is reachable as a supertype of type 'class java.lang.StringIndexOutOfBoundsException'
+      'java.lang.StringIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NegativeArraySizeException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NegativeArraySizeException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NullPointerException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NullPointerException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NumberFormatException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NumberFormatException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.RuntimeException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.String
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String' is reachable as a subtype of type 'class java.lang.String'
+      Started from 'java.lang.String'
+
+java.lang.StringIndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.StringIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.Throwable
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Throwable' is reachable as a supertype of type 'class java.lang.Exception'
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.UnsupportedOperationException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.UnsupportedOperationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.annotation.AnnotationTypeMismatchException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.annotation.AnnotationTypeMismatchException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.ArrayList<tango.client.PickupWord>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ArrayList<tango.client.PickupWord>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.PickupWord>'
+      Started from 'java.util.ArrayList<tango.client.PickupWord>'
+
+java.util.ConcurrentModificationException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ConcurrentModificationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.EmptyStackException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.EmptyStackException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.NoSuchElementException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.NoSuchElementException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.TooManyListenersException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.TooManyListenersException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+tango.client.PickupWord
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.PickupWord' is reachable as a subtype of type 'class tango.client.PickupWord'
+      'tango.client.PickupWord' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.PickupWord>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.PickupWord>'
+      Started from 'java.util.ArrayList<tango.client.PickupWord>'
+
+tango.client.PickupWordResultSet
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.PickupWordResultSet' is reachable as a subtype of type 'class tango.client.PickupWordResultSet'
+      Started from 'tango.client.PickupWordResultSet'
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Tango</display-name>
+	<servlet>
+		<servlet-name>PickupWordService</servlet-name>
+		<servlet-class>tango.server.word.PickupWordServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>RSSService</servlet-name>
+		<servlet-class>tango.server.rss.RSSServiceImpl</servlet-class>
+	</servlet><servlet>
+		<servlet-name>GameService</servlet-name>
+		<servlet-class>tango.server.game.GameServiceImpl</servlet-class>
+	</servlet>
+<servlet>
+	<servlet-name>CanvasService</servlet-name>
+	<servlet-class>
+	tango.server.CanvasServiceImpl</servlet-class>
+</servlet>
+	<servlet-mapping>
+		<servlet-name>PickupWordService</servlet-name>
+		<url-pattern>/pickupWordService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RSSService</servlet-name>
+		<url-pattern>/rssService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GameService</servlet-name>
+		<url-pattern>/gameService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CanvasService</servlet-name>
+		<url-pattern>/canvasService</url-pattern>
+	</servlet-mapping><welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>

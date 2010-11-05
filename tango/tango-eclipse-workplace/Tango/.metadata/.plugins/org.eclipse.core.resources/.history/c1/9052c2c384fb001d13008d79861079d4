@@ -1,0 +1,202 @@
+package tango.client.rss;
+
+import java.util.Set;
+
+import tango.client.Tango;
+import tango.client.ui.TangoPanel;
+
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * <p>
+ * {@link TangoPanel}をRSS用に拡張したクラスです。
+ * </p>
+ * 
+ * @author Ukit Grey
+ * 
+ */
+public class RSSPanel extends TangoPanel {
+	private Button wordPanel;
+	private final String name;
+	// final String howToRead;
+	// final String description;
+	private final String count;
+	private final String rank;
+	private int xPos;
+	private int yPos;
+	private boolean savedFlag;
+	private Set<NewsFields> newsCollection;
+
+	/* Default Constructor */
+	public RSSPanel() {
+		super("null");
+		this.name = "new";
+		this.count = "0";
+		this.rank = "0";
+		this.wordPanel = new Button(this.name);
+		this.savedFlag = false;
+
+		this.wordPanel.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				// Create the new popup.
+				final RSSTangoPanelPopup popup = new RSSTangoPanelPopup();
+				popup
+						.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+							public void setPosition(int offsetWidth,
+									int offsetHeight) {
+								xPos = wordPanel.getAbsoluteLeft()
+										+ wordPanel.getOffsetWidth();
+								yPos = wordPanel.getAbsoluteTop()
+										+ wordPanel.getOffsetHeight() / 2;
+								popup.setPopupPosition(xPos, yPos);
+							}
+						});
+			}
+		});
+
+		// style sheet
+		this.wordPanel.addStyleName("WordPanel");
+
+		initWidget(wordPanel);
+	}
+
+	/* Main Constructor */
+	public RSSPanel(RankingFields rankingFields) {
+		super("null");
+		this.name = rankingFields.getKeyword();
+		this.count = ((Integer) rankingFields.getCount()).toString();
+		this.rank = ((Integer) rankingFields.getRank()).toString();
+		this.wordPanel = new Button(this.name);
+		this.savedFlag = false;
+		this.newsCollection = rankingFields.getNewsFieldsCollection();
+
+		this.wordPanel.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				
+				showNewsPanel(newsCollection);
+				
+				// Create the new popup.
+				final RSSTangoPanelPopup popup = new RSSTangoPanelPopup();
+				popup
+						.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+							public void setPosition(int offsetWidth,
+									int offsetHeight) {
+								xPos = wordPanel.getAbsoluteLeft()
+										+ wordPanel.getOffsetWidth();
+								yPos = wordPanel.getAbsoluteTop()
+										+ wordPanel.getOffsetHeight() / 2;
+								popup.setPopupPosition(xPos, yPos);
+							}
+						});
+			}
+		});
+
+		/* style sheet */
+		this.wordPanel.addStyleName("WordPanel");
+
+		this.initWidget(wordPanel);
+	}
+
+	private class RSSTangoPanelPopup extends PopupPanel {
+		private VerticalPanel vPanel;
+		private Label rLabel;
+		private Label cLabel;
+		private Button saveBtn;
+		private ClickListener cListener;
+
+		public RSSTangoPanelPopup() {
+			super(true); // 範囲外をクリックすることでポップアップを消せるようにする
+			vPanel = new VerticalPanel();
+			rLabel = new Label("ランク：" + rank + "位");
+			cLabel = new Label("回数：" + count + "回");
+			cListener = new ClickListener() {
+				public void onClick(Widget sender) {
+					if (isSaveWord() == false) {
+						saveWord(); // この単語を保存し、テーブルから削除する。
+					} else {
+						deleteWord();
+					}
+					setVisible(false); // 保存された単語のポップアップ表示を消す。
+				}
+			};
+			saveBtn = new Button();
+			saveBtn.addClickListener(cListener);
+
+			if (isSaveWord() == false) {
+				saveBtn.setText("この単語を保存する");
+			} else {
+				saveBtn.setText("この単語を削除する");
+			}
+
+			vPanel.add(rLabel);
+			vPanel.add(cLabel);
+			vPanel.add(saveBtn);
+			setWidget(vPanel);
+		}
+	}
+
+	/* この関数を呼び出したWord　PanelをsaveWordTableに保存する */
+	public void saveWord() {
+		this.savedFlag = true;
+		Tango.saveWordPanel(this);
+	}
+
+	// この関数を呼び出したword panelをsaveWordTableの(x,y)座標に保存する
+	public void saveWord(int row, int col) {
+		Tango.saveWordPanel(row, col, this);
+	}
+
+	public void deleteWord() {
+		this.removeFromParent();
+	}
+
+	public boolean isSaveWord() {
+		return this.savedFlag;
+	}
+
+	/* Word Panelの表示名を変更する */
+	public void setText(String titleLabel) {
+		wordPanel.setText(titleLabel);
+	}
+	
+	private void showNewsPanel(Set<NewsFields> newsCollection){
+		RSSTangoMain.clearNewsPanel();
+		for (NewsFields newsFields : newsCollection) {
+			String html = new String();
+
+			html += "<p class=\"RSSTitle\">"
+					+ "<a class=\"RSSLink\" href=\""
+					+ newsFields.getLink() + "\">"
+					+ newsFields.getTitle() + "</a>" + "</p>";
+			html += "<p class=\"RSSCategory\">" + "" + "</p>";
+			html += "<span class=\"RSSChannelTitle\">"
+					+ newsFields.getChannelTitle() + "</span>";
+			html += "<span class=\"RSSDate\">" + newsFields.getDate()
+					+ "</span>";
+
+			HTMLPanel htmlPanelHeader = new HTMLPanel(html);
+			htmlPanelHeader.setStyleName("RSSHtmlPanelHeader");
+
+			html = new String();
+			html += "<div class=\"RSSDescription\">"
+					+ newsFields.getDescription() + "</div>";
+
+			HTMLPanel htmlPanelBody = new HTMLPanel(html);
+			htmlPanelBody.setStyleName("RSSHtmlPanelBody");
+
+			FlowPanel htmlPanel = new FlowPanel();
+			htmlPanel.add(htmlPanelHeader);
+			htmlPanel.add(htmlPanelBody);
+			htmlPanel.setStyleName("RSSHtmlPanel");
+
+			RSSTangoMain.addToNewsPanel(htmlPanel);
+		}
+	}
+}

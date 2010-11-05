@@ -1,0 +1,5 @@
+package com.gwtapps.messenger.server;
+
+public class MessengerServiceCometImpl {
+
+}

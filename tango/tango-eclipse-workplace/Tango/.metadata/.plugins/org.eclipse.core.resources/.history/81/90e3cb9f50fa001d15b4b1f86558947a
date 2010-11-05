@@ -1,0 +1,5 @@
+package com.gwtapps.messenger.client.view;
+
+public class ContactListView {
+
+}

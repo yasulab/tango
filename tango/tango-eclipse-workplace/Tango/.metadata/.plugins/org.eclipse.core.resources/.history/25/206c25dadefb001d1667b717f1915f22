@@ -1,0 +1,167 @@
+package tango.client.messenger.view;
+
+import java.util.ArrayList;
+
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.user.client.ui.KeyboardListenerAdapter;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+import tango.client.Tango;
+import tango.client.share.ShareTangoMain;
+import tango.client.ui.PickupTango;
+import tango.client.ui.TangoPanel;
+import tango.client.ui.TitleCommandBar;
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+
+/**
+ * @author yasukawa
+ * ２つのコンタクト間のチャットメッセージを表示し、ユーザがメッセージを送ることができるようにします。
+ */
+public class ChatWindowView extends Composite{
+
+	// Input Textに何らかの文字列を入力してEnterを押すと、onSendMessageが動く。
+	private class InputListener extends KeyboardListenerAdapter{
+		public void onKeyPress(Widget sender, char keyCode, int modifiers){
+			if( keyCode == KeyboardListener.KEY_ENTER ){
+				String text = input.getText();
+				if( text.length()>0 ){
+					Message message = new Message(text);
+					message.setPickupTangoList(Tango.getSavedTangoList());
+					addMessage( view.getContactList().getMe(), message );
+					view.getListener().onSendMessage( contactTo, message );
+					input.setText("");
+				}
+			}
+		}
+	}
+
+	static final int CHAT_WINDOW_WIDTH = 250;
+	static final int CHAT_WINDOW_HEIGHT = 200;
+	static final int CHAT_WINDOW_MARGIN = 5;
+	static final int CHAT_WINDOW_OFFSET = 20;
+
+	private MessengerView view;
+	private Contact contactTo;
+	private ScrollPanel conversationScroller = new ScrollPanel();
+	private VerticalPanel conversationPanel = new VerticalPanel();
+	private TextBox input = new TextBox();
+	int position = -1;
+
+	public ChatWindowView( MessengerView view, Contact contactTo ){
+		this.view = view;
+		this.contactTo = contactTo;
+
+		VerticalPanel mainPanel = new VerticalPanel();
+		initWidget( mainPanel );
+
+		TitleCommandBar titleBar;
+		titleBar = new TitleCommandBar( contactTo.getName() );
+		titleBar.addCommand("close", new ClickListener(){ 
+			public void onClick( Widget sender ){ 
+				ChatWindowView.this.view.closeChatWindow( ChatWindowView.this ); } });
+		mainPanel.add(titleBar);		
+
+		VerticalPanel vpanel = new VerticalPanel();
+		vpanel.setHeight("100%");
+		vpanel.setWidth("100%");
+		mainPanel.add( vpanel );
+		mainPanel.setCellHeight(vpanel, "100%");
+
+		conversationScroller.setHeight("150px");
+		conversationScroller.setWidget( conversationPanel );
+
+		vpanel.add( conversationScroller );
+		vpanel.setCellHeight(conversationScroller, "100%");		
+
+		conversationScroller.setWidget( conversationPanel );
+		vpanel.add( input );
+		input.setWidth("100%");
+		input.addKeyboardListener( new InputListener() );
+
+		setStyleName("chatWindow");
+		vpanel.setStyleName("chatWindowContent");
+		conversationScroller.setStyleName("chatWindowConversation");
+		input.setStyleName("chatWindowInput");
+
+		// htmlPanel.add(this, "messengerView");)
+		// RootPanel.get().add(this);
+		ShareTangoMain.setChatWindow(this);
+	}
+
+	/**
+	 * @param message
+	 * Messageしか引数に与えられなかった場合は
+	 * 保有しているcontcactToに対してメッセージを送信する
+	 */
+	public void addMessage( Message message ){
+		addMessage( contactTo, message );
+	}
+	
+	/**
+	 * @param contact
+	 * @param message
+	 * ContactとMessageが同時に引数に与えられた場合
+	 * 指定されたコンタクトに対してメッセージを送信する
+	 */
+	public void addMessage( Contact contact, Message message ){
+		HTML messageLabel = new HTML("<b>" + contact.getName() + "</b>: " + message.getMessage()); 
+		//System.out.println("HTML messageLabel = " + messageLabel.getHTML());
+		conversationPanel.add( messageLabel );
+		showSavedTangoList(message.getPickupTangoList());
+		// conversationPanel.add(new TangoPanel(message.getPickupTango()));
+		conversationScroller.setScrollPosition(conversationPanel.getOffsetHeight());
+		messageLabel.setStyleName("convMessage");
+	}
+
+	
+	private void showSavedTangoList(ArrayList<PickupTango> savedTangoList){
+		System.out.println("pickupTangos.size = " + savedTangoList.size());
+		if(savedTangoList.size()>0){
+			for(int i=0;i<savedTangoList.size();i++){
+				conversationPanel.add(new TangoPanel(savedTangoList.get(i)));
+			}
+		}
+	}
+
+	public void show(){
+		setWidth( CHAT_WINDOW_WIDTH + "px" );
+		setHeight(CHAT_WINDOW_HEIGHT + "px");
+		setVisible( true );
+		setPosition( position );
+		input.setFocus( true );
+	}
+
+	public void setPosition( int position ){
+		this.position = position;
+		/*
+		int top = Window.getClientHeight() +
+			DOM.getIntAttribute(RootPanel.getBodyElement(), "scrollTop") -
+			getOffsetHeight() - CHAT_WINDOW_MARGIN;		
+		int left = Window.getClientWidth() +
+			DOM.getIntAttribute(RootPanel.getBodyElement(), "scrollLeft") -
+			CHAT_WINDOW_WIDTH*(position+1) - CHAT_WINDOW_MARGIN*(position+1) - CHAT_WINDOW_OFFSET;
+		DOM.setStyleAttribute(getElement(),"position","absolute" );
+		DOM.setStyleAttribute(getElement(),"top",Integer.toString( top ) );
+		DOM.setStyleAttribute(getElement(),"left",Integer.toString( left ) );
+		conversationScroller.setScrollPosition(conversationPanel.getOffsetHeight());
+		 */
+	}
+	
+	public void triggerSendSavedTango(){
+	view.getListener().onSendSavedTango(new PickupTango());
+	}
+
+}

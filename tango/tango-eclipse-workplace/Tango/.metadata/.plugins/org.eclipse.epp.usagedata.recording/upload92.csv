@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660835828
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660891218
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234660892703
+started,bundle,org.eclipse.wst.ws.service.policy,1.0.2.v200809101532,org.eclipse.wst.ws.service.policy,1234660896500
+started,bundle,org.eclipse.wst.command.env,1.0.306.v200807231700,org.eclipse.wst.command.env,1234660896546
+started,bundle,org.eclipse.wst.ws,1.1.2.v200809081517,org.eclipse.wst.ws,1234660896546
+started,bundle,org.eclipse.compare,3.4.0.I20080604,org.eclipse.compare,1234660896718
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234660898531
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660910125
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660910250
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660910265
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660956875
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234660973828
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234661009593
+started,bundle,org.apache.derby.ui,1.1.2,org.apache.derby.ui,1234661016156
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234661021843
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234661022875
+opened,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234661026031
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234661026109
+started,bundle,org.eclipse.jst.server.ui,1.0.303.v200805140145,org.eclipse.jst.server.ui,1234661029281
+started,bundle,org.eclipse.ui.views.log,1.0.0.v20080803-1700,org.eclipse.ui.views.log,1234661029296
+started,bundle,org.eclipse.pde.ui,3.4.0.v20080803-1700,org.eclipse.pde.ui,1234661029328
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234661031000
+started,bundle,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui,1234661033734
+started,bundle,org.eclipse.wst.dtd.ui,1.0.301.v200808072012,org.eclipse.wst.dtd.ui,1234661034296

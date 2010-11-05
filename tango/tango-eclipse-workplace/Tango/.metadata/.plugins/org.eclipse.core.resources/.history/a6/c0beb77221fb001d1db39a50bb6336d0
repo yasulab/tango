@@ -1,0 +1,82 @@
+package tango.client.game;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import tango.client.messenger.Messenger;
+
+/**
+ * @author yasukawa
+ * This class is a main panel of "Game Tango!".
+ */
+public class GameTangoMain extends Composite{
+	DockPanel mainPanel;
+	/** メッセージ入力フィールド */
+	private TextBox msgBox = new TextBox();
+	/** メッセージ送信ボタン */
+	private Button sendBtn = new Button("send to");
+	/** 結果表示領域 */
+	private ListBox results = new ListBox();
+	public Messenger messenger = new Messenger();
+	
+	public GameTangoMain(){
+		sendBtn.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				// プロキシオブジェクトを取得
+				GameServiceAsync proxy = (GameServiceAsync) GWT.create(GameService.class);
+				// サービスへのエントリポイントを設定
+				ServiceDefTarget entrypoint = (ServiceDefTarget) proxy;
+				String path = GWT.getModuleBaseURL();
+				entrypoint.setServiceEntryPoint(path+"gameService");
+
+				// echobackサービスの結果への反応を定義
+				AsyncCallback callback = new AsyncCallback() {
+					public void onSuccess(Object result) {
+						results.addItem((String) result);
+					}
+
+					public void onFailure(Throwable caught) {
+						results.addItem(caught.getMessage());
+					}
+				};
+				
+				// サービスの呼び出し
+				proxy.gameService(msgBox.getText(), callback);
+			}
+		}); // end of sendBtn.addClickListener
+		
+		
+		/* Initialize */
+		mainPanel = new DockPanel();
+		
+		/* Game Tango! Layout*/
+		mainPanel.add(new Label("Game Tango!"), DockPanel.NORTH);
+		// mainPanel.add(new Label("Now Constructing..."), DockPanel.CENTER);
+		
+		/* style sheet */
+		mainPanel.setStyleName("GameTango-main");
+		
+		// UIの構築
+		Panel panel = new VerticalPanel();
+		panel.add(new Label("message: "));
+		panel.add(msgBox);
+		panel.add(sendBtn);
+		panel.add(new Label("results: "));
+		panel.add(results);
+		results.setMultipleSelect(true);
+		mainPanel.add(panel, DockPanel.CENTER);
+		mainPanel.add(messenger, DockPanel.SOUTH);
+		
+		initWidget(mainPanel);
+	}
+}

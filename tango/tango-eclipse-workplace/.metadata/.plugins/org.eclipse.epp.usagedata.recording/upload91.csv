@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.core.variables,3.2.100.v20080529-1300,org.eclipse.core.variables,1247297727426
+started,bundle,org.eclipse.jdt.debug.ui,3.3.1.v20080730_r341,org.eclipse.jdt.debug.ui,1247297728356
+activated,view,org.eclipse.ui.console,3.3.1.v20090128_r342,org.eclipse.ui.console.ConsoleView,1247297731082
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.paste,1247297738846
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297788443
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297805527
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297818321
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297819695
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297869137
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297889509
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297899003
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247297951476
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.paste,1247297959083
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298051500
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298052228
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298052543
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298116718
+executed,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.paste,1247298121006
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298134520
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298206463
+no handler,command,org.eclipse.ui,3.4.2.M20090204-0800,org.eclipse.ui.edit.undo,1247298242706
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1247298294268
+activated,view,org.eclipse.ui.console,3.3.1.v20090128_r342,org.eclipse.ui.console.ConsoleView,1247298302563
+deactivated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298306170
+activated,workbench,org.eclipse.ui.workbench,3.4.2.M20090127-1700,,1247298309820

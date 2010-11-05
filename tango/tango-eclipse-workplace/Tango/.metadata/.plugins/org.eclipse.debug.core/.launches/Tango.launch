@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="in.cypal.studio.gwt.core.launchConfigurationType">
+<booleanAttribute key="in.cypal.studio.gwt.core.launchAttrHeadless" value="true"/>
+<intAttribute key="in.cypal.studio.gwt.core.launchAttrLogLevel" value="2"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchAttrPort" value="8888"/>
+<intAttribute key="in.cypal.studio.gwt.core.launchAttrStyle" value="1"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchAttrUrl" value=""/>
+<booleanAttribute key="in.cypal.studio.gwt.core.launchAttrUseDefaultUrl" value="true"/>
+<booleanAttribute key="in.cypal.studio.gwt.core.launchAttrUseEmbeddedServer" value="true"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchBlacklist" value="&lt;comma separated list&gt;"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchModuleName" value="tango.Tango"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchProjectName" value="Tango"/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchVmOptions" value=""/>
+<stringAttribute key="in.cypal.studio.gwt.core.launchWhitelist" value="&lt;comma separated list&gt;"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/Tango"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Tango"/>
+</launchConfiguration>

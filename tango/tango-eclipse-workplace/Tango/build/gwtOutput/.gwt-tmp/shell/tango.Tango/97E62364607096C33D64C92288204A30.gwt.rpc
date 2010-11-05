@@ -1,0 +1,14 @@
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true
+java.lang.Exception, false
+java.lang.RuntimeException, false
+java.lang.String, true
+java.lang.Throwable, false
+java.util.ArrayList, true
+tango.client.messenger.Event, true
+tango.client.messenger.SendMessageEvent, true
+tango.client.messenger.ShareTangoEvent, true
+tango.client.messenger.SignOffEvent, true
+tango.client.messenger.SignOnEvent, true
+tango.client.messenger.model.Contact, true
+tango.client.messenger.model.Message, true
+tango.client.ui.PickupTango, true

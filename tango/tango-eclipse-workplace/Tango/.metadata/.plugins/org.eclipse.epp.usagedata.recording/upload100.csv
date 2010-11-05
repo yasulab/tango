@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.save,1234662413500
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234662451125
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662464812
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662479640
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662481140
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662486828
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662489640
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662502250
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662505296
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662507421
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234662509703
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234662515921
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662515953
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.copy,1234662518031
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234662519828
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234662522578
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.paste,1234662522843
+opened,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234662535906
+activated,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234662535953
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234662544187
+activated,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234662552140
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234662552203
+closed,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234662552203
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234662553359
+opened,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234662556296

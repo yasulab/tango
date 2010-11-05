@@ -1,0 +1,293 @@
+Reachable types computed on: Tue Feb 17 20:00:14 JST 2009
+com.google.gwt.http.client.RequestException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.http.client.RequestException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+com.google.gwt.user.client.rpc.InvocationException
+   Serialization status
+      Field serializable
+   Path
+      'com.google.gwt.user.client.rpc.InvocationException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException'
+      'com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.SerializableException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.SerializableException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.SerializationException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.SerializationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.ServiceDefTarget.NoServiceEntryPointSpecifiedException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArithmeticException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArithmeticException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArrayIndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArrayIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ArrayStoreException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ArrayStoreException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.ClassCastException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.ClassCastException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.Exception
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.IllegalArgumentException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IllegalArgumentException' is reachable as a supertype of type 'class java.lang.NumberFormatException'
+      'java.lang.NumberFormatException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.IllegalStateException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IllegalStateException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.IndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.IndexOutOfBoundsException' is reachable as a supertype of type 'class java.lang.ArrayIndexOutOfBoundsException'
+      'java.lang.ArrayIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NegativeArraySizeException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NegativeArraySizeException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NullPointerException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NullPointerException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.NumberFormatException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.NumberFormatException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.RuntimeException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.String
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String' is reachable as a subtype of type 'class java.lang.String'
+      Started from 'java.lang.String'
+
+java.lang.StringIndexOutOfBoundsException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.StringIndexOutOfBoundsException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.String[]
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String[]' is reachable from field 'categories' of type 'tango.client.rss.RSSFields'
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.HashSet<E>'
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+java.lang.Throwable
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Throwable' is reachable as a supertype of type 'class java.lang.Exception'
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.UnsupportedOperationException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.UnsupportedOperationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.lang.annotation.AnnotationTypeMismatchException
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.annotation.AnnotationTypeMismatchException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.ArrayList<tango.client.ui.PickupTango>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+java.util.ConcurrentModificationException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ConcurrentModificationException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.EmptyStackException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.EmptyStackException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.HashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+java.util.LinkedHashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+java.util.NoSuchElementException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.NoSuchElementException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+java.util.TooManyListenersException
+   Serialization status
+      Instantiable
+   Path
+      'java.util.TooManyListenersException' is reachable as a subtype of type 'class java.lang.Exception'
+      Started from 'java.lang.Exception'
+
+tango.client.rss.RSSFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.HashSet<E>'
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+tango.client.rss.TopicFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.TopicFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.HashSet<E>'
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+tango.client.rss.ui.RSSPickupTango
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+tango.client.ui.PickupTango
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.ui.PickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      Started from 'java.util.ArrayList<tango.client.ui.PickupTango>'
+
+tango.client.ui.PickupTangoResultSet
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.ui.PickupTangoResultSet' is reachable as a subtype of type 'class tango.client.ui.PickupTangoResultSet'
+      Started from 'tango.client.ui.PickupTangoResultSet'
+

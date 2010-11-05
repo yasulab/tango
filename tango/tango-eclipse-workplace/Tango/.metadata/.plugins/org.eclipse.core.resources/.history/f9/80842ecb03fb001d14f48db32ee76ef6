@@ -1,0 +1,26 @@
+package com.gwtapps.messenger.client.model;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+/**
+ * @author yohei yasukawa
+ * コンタクト名の属性を１つだけ持つ。
+ * このクラスを継承することで、より多くの機能を低位供することができます。
+ */
+
+public class Contact implements IsSerializable{
+	private String name;	// コンタクトの名前のみを属性に持つ
+	
+	// DefaultのConstructor(Serializableにするため)
+	public Contact(){}
+	
+	// コンタクトの名前
+	public Contact( String name ){
+		this.name = name;
+	}	
+	
+	// コンタクトの名前を返すｓ
+	public String getName(){
+		return name;
+	}
+}

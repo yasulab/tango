@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name="com.google.gwt.user.User"/>
+
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class="tango.client.Tango"/>
+  
+  	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+  	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
+  	
+<servlet class="tango.server.PickupWordServiceImpl" path="/pickupWordService"/>
+<stylesheet src="css/format.css"></stylesheet>
+	<inherits name="com.google.gwt.http.HTTP"></inherits>
+	</module>

@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>GWT Applications - Instant Messenger</title>
+		<style>
+		    body{margin:0px;padding:0px;}
+			body,td,a,div,.p{font-family:arial,sans-serif;margin-left:0px;margin-right:0px;}
+			div,td{color:#000000}
+			a:link,.w,.w a:link{color:#0000cc}
+			a:visited{color:#551a8b}
+			a:active{color:#ff0000}
+			h2{ margin:0px;font-family:arial;}
+			
+			.myContactItem{ background-color:#def; font-weight:bold;}
+			.contactItem td{ padding:5px;}
+			
+			.chatWindow{ border:1px solid #cde; background-color:#FFF; }
+			.chatWindowContent{ padding:5px;}
+			.chatWindowConversation{ border-bottom:1px solid #eee;  }
+			.chatWindowConversation div{ padding-bottom:5px; }
+			.chatWindowInput{ border:2px solid #acf; }
+			.gwtapps-TitleBar{ padding:2px; padding-left:5px; background-color:#def; }
+			.gwtapps-TitleBarTitle{ font-weight:bold; }
+			.gwtapps-TitleBarCommand{ font-size:10px; }
+			.convMessage{ font-size:11px; margin-bottom:5px; }
+.popup{ border:1px solid #CCC; background-color:#FFE; padding:10px;}
+		</style>
+		
+	</head>
+	<body>
+		<script language="javascript" src="com.gwtapps.messenger.Messenger.nocache.js"></script>
+
+		<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+		
+		<div style="position:absolute;"><a href="http://www.gwtapps.com"><img src="http://rdews.com/title.png" align="middle"
+height="48" border="0"/></a></div>
+<center><h2>Instant Messenger</h2></center>
+	<table cellspacing="10" style="padding-top:20px;"><tr>
+	<td valign="top" width="175">
+		<div id="messengerView" style="width:100%;height:200px;border:1px solid #cde;overflow:auto;"></div>
+	</td>
+	<td>
+	<h4>Instant Messaging History from Wikipedia</h4>
+	<p>Instant messaging applications began to appear in the 1970s on multi-user operating systems such as UNIX, initially to facilitate communication with other users logged in to the same machine, then on the local network, and subsequently across the internet. Some of these used a peer-to-peer protocol (eg talk, ntalk and ytalk), while others required peers to connect to a server (see talkers and IRC). Because all of these protocols were based inside a console window, most of those discovering the internet in the mid-1990s and equating it with the web tended not to encounter them.</p>
+	<p>In the last half of the 1980s and into the early 1990s, the Quantum Link online service for Commodore 64 computers offered user-to-user messages between currently connected customers which they called "On-Line Messages" (or OLM for short). Quantum Link's better known later incarnation, America Online, offers a similar product under the name "AOL Instant Messages" (AIM). While the Quantum Link service ran on a Commodore 64, using only the Commodore's PETSCII text-graphics, the screen was visually divided up into sections and OLMs would appear as a yellow bar saying "Message From:" and the name of the sender along with the message across the top of whatever the user was already doing, and presented a list of options for responding.[1] As such, it could be considered a sort of GUI, albeit much more primitive than the later Unix, Windows and Macintosh based GUI IM programs. OLMs were what Q-Link called "Plus Services" meaning they charged an extra per-minute fee on top of the monthly Q-Link access costs.</p>
+	<p>Modern GUI-based messaging clients began to take off in the late 1990s with ICQ (1996) and AOL Instant Messenger (AIM, 1997) . AOL later acquired Mirabilis, the creators of ICQ. A few years later AOL was awarded two patents for instant messaging by the U.S. patent office. Meanwhile, other companies developed their own applications (Yahoo, MSN, Excite, Ubique, IBM), each with its own proprietary protocol and client; users therefore had to run multiple client applications if they wished to use more than one of these networks.</p>
+	<p>In 2000, an open source application and open standards-based protocol called Jabber was launched. Jabber servers could act as gateways to other IM protocols, reducing the need to run multiple clients. Modern multi-protocol clients such as Gaim, Trillian, Adium and Miranda can use any of the popular IM protocols without the need for a server gateway.</p>
+	<p>Recently, many instant messaging services have begun to offer video conferencing features, Voice Over IP (VoIP) and web conferencing services. Web conferencing services integrate both video conferencing and instant messaging capabilities. Some newer instant messaging companies are offering desktop sharing, IP radio, and IPTV to the voice and video features.</p>
+	<p>The term "instant messenger" is a service mark of Time Warner[2] and may not be used in software not affiliated with AOL in the United States. For this reason, the instant messaging client formerly known as GAIM or gAIM is now only to be referred to as Gaim or gaim.</p>
+	</td>
+	</tr></table>
+	</body>
+</html>

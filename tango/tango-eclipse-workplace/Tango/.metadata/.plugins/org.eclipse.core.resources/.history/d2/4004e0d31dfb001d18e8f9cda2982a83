@@ -1,0 +1,12 @@
+package tango.client.rss;
+
+import java.util.ArrayList;
+
+import tango.client.ui.PickupTango;
+import tango.client.ui.PickupTangoResultSet;
+
+import com.google.gwt.user.client.rpc.RemoteService;
+
+public interface RSSService extends RemoteService {
+	public ArrayList<PickupTango> rssService(PickupTangoResultSet resultSet);
+}

@@ -1,0 +1,167 @@
+package tango.client.rss;
+
+import java.util.ArrayList;
+import java.util.Set;
+
+import tango.client.rss.ui.RSSPanelTable;
+import tango.client.ui.PickupTango;
+import tango.client.ui.PickupTangoResultSet;
+import tango.client.ui.TangoPanelTable;
+import tango.client.ui.TangoTableBox;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * @author Ukit Grey This class is a main panel of "RSS Tango!".
+ */
+public class RSSTangoMain extends Composite {
+	static FlowPanel newsPanel;
+	public static void addToNewsPanel(FlowPanel htmlPanel) {
+		newsPanel.add(htmlPanel);
+	}
+	public static void clearNewsPanel() {
+		newsPanel.clear();
+	}
+	String errorMessage;
+	DockPanel mainPanel;
+	Set<RankingFields> rankingCollection;
+	ArrayList<PickupTango> receivePickupWords = new ArrayList<PickupTango>();
+	PickupTangoResultSet resultSet = new PickupTangoResultSet();
+
+	Button rssButton;
+
+	TangoPanelTable rssPanelTable;
+
+	TangoTableBox rssTableBox;
+	HorizontalPanel settingHorizontalPanel;
+	HorizontalPanel settingPanel;
+
+	ScrollPanel settingScrollPanel;
+
+	public RSSTangoMain() {
+		this(true);
+	}
+
+	public RSSTangoMain(boolean flag) {
+		/* Initialize */
+		mainPanel = new DockPanel();
+		settingPanel = new HorizontalPanel();
+		settingScrollPanel = new ScrollPanel();
+		// relationalWordBox = new RelationalWordBox(this);;
+		rssButton = new Button("tango!");
+		settingHorizontalPanel = new HorizontalPanel();
+		rssPanelTable = new RSSPanelTable();
+		rssTableBox = new TangoTableBox(rssPanelTable);
+		newsPanel = new FlowPanel();
+
+		/* newsRankingのインスタンスを作成 */
+		// プロキシのインスタンスを取得
+		NewsRankingAsync proxy = (NewsRankingAsync) GWT
+				.create(NewsRanking.class);
+
+		// プロキシにサービスへの接続点を設定
+		ServiceDefTarget entrypoint = (ServiceDefTarget) proxy;
+		String entryURL = GWT.getModuleBaseURL() + "newsRanking";
+		entrypoint.setServiceEntryPoint(entryURL);
+
+		// initializeの結果に対する処理を定義
+		AsyncCallback<Object> callback = new AsyncCallback<Object>() {
+			public void onFailure(Throwable caught) {
+				Window.alert("[onFailure] 'caught.getMessage()' is \n"
+						+ caught.getMessage());
+			}
+
+			@SuppressWarnings("unchecked")
+			public void onSuccess(Object result) {
+				if (result != null)
+					rankingCollection = (Set<RankingFields>) result;
+				else
+					Window.alert("RSSフィードを取得できませんでした。");
+			}
+		};
+
+		// initializeを呼び出す
+		if (flag)
+			proxy.initialize(null, callback);
+		
+/*		// getRankingFieldsCollectionの結果に対する処理を定義
+		callback = new AsyncCallback<Object>() {
+			public void onFailure(Throwable caught) {
+				Window.alert("[onFailure] 'caught.getMessage()' is \n"
+						+ caught.getMessage());
+			}
+
+			@SuppressWarnings("unchecked")
+			public void onSuccess(Object result) {
+				if (result != null)
+					rankingCollection = (Set<RankingFields>) result;
+				else
+					Window.alert("RSSフィードを取得できませんでした。");
+			}
+		};
+		
+		// getRankingFieldsCollectionを呼び出す
+		if (flag)
+			proxy.getRankingFieldsCollection(callback);*/
+
+		/* Click Action on "Tango!" button */
+		rssButton.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				if (rankingCollection != null) {
+					RSSPanelTable table = (RSSPanelTable) rssPanelTable;
+					table.shuffle(rankingCollection);
+				}
+			}
+		});
+
+		/* Simple tango! Panel Layout */
+		/* Word Panel Table Layout */
+		mainPanel.add(settingPanel, DockPanel.NORTH);
+		mainPanel.add(rssPanelTable, DockPanel.CENTER);
+		mainPanel.add(newsPanel, DockPanel.SOUTH);
+		mainPanel.setCellHeight(rssPanelTable, "0px");
+		mainPanel.setCellHorizontalAlignment(rssPanelTable,
+				DockPanel.ALIGN_CENTER);
+		mainPanel.setCellVerticalAlignment(rssPanelTable, DockPanel.ALIGN_TOP);
+		mainPanel.setCellHeight(newsPanel, "0px");
+		mainPanel.setCellHorizontalAlignment(newsPanel, DockPanel.ALIGN_CENTER);
+		mainPanel.setCellVerticalAlignment(newsPanel, DockPanel.ALIGN_TOP);
+
+		settingPanel.add(rssButton);
+		settingPanel.add(settingScrollPanel);
+		settingPanel.setCellVerticalAlignment(rssButton,
+				HorizontalPanel.ALIGN_MIDDLE);
+		settingPanel.setCellVerticalAlignment(settingScrollPanel,
+				HorizontalPanel.ALIGN_MIDDLE);
+
+		settingScrollPanel.setAlwaysShowScrollBars(false); // make Scroll Bar
+		// visible?, or not.
+		settingScrollPanel.setPixelSize(700, 120);
+		settingScrollPanel.add(settingHorizontalPanel);
+		settingHorizontalPanel.add(rssTableBox);
+
+		/* Setting Style Sheet */
+		settingPanel.setStyleName("SettingPanel");
+		rssButton.setStyleName("TangoButton");
+		settingScrollPanel.setStyleName("SettingScrollPanel");
+		settingHorizontalPanel.setStyleName("SettingHorizontalPanel");
+		newsPanel.setStyleName("RSSNewsPanel");
+
+		initWidget(mainPanel);
+	}
+
+	public FlowPanel getNewsPanel() {
+		return newsPanel;
+	}
+}

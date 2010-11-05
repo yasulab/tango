@@ -1,0 +1,18 @@
+package com.gwtapps.messenger.client;
+
+import java.util.ArrayList;
+
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.Message;
+
+public interface MessengerService extends RemoteService
+{
+	void signIn( String name );
+	void signOut();
+	/**
+	 * @gwt.typeArgs <com.gwtapps.messenger.client.Event>
+	 */
+	ArrayList getEvents();
+	void sendMessage( Contact to, Message message );
+}

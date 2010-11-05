@@ -1,0 +1,85 @@
+package com.gwtapps.messenger.client;
+
+import java.util.ArrayList;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.ContactList;
+import com.gwtapps.messenger.client.model.Message;
+import com.gwtapps.messenger.client.view.MessengerView;
+import com.gwtapps.messenger.client.view.MessengerViewListener;
+
+public class MessengerServiceClientImpl implements MessengerViewListener{
+	
+	private class SignInCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error sign in",throwable); }
+		public void onSuccess(Object obj){
+			view.setContactList( contactList );
+			messengerService.getEvents( new GetEventsCallback() );
+		}
+	}
+	
+	private class EmptyCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error",throwable); }
+		public void onSuccess(Object obj){}
+	}	
+	
+	private class GetEventsCallback implements AsyncCallback{
+		public void onFailure(Throwable throwable){ GWT.log("error get events",throwable); }
+		public void onSuccess(Object obj){
+			ArrayList events = (ArrayList)obj;
+			for( int i=0; i< events.size(); ++i ){
+				Object event = events.get(i);
+				handleEvent( event );
+			}
+			messengerService.getEvents( this );
+		}
+	}
+
+	private MessengerServiceAsync messengerService;
+	private ContactList contactList;
+	private MessengerView view = new MessengerView( this );
+
+	public MessengerServiceClientImpl( String URL ){
+		messengerService = (MessengerServiceAsync) GWT.create( MessengerService.class );
+		ServiceDefTarget endpoint = (ServiceDefTarget) messengerService;
+		endpoint.setServiceEntryPoint( URL );		
+	}
+
+	public MessengerView getView(){
+		return view;
+	}
+
+	public void onSignIn( String name ){
+		contactList = new ContactList( name );
+		messengerService.signIn( name, new SignInCallback() );
+	}
+
+	public void onSignOut(){
+		messengerService.signOut( new EmptyCallback() );
+	}	
+
+	public void onSendMessage( Contact toContact, Message message ){
+		messengerService.sendMessage( toContact, message, new EmptyCallback() );
+	}
+
+	protected void handleEvent( Object event ){
+		if( event instanceof SendMessageEvent ){	
+			SendMessageEvent sendMessageEvent = (SendMessageEvent)event;
+			view.getChatWindowView( sendMessageEvent.sender ).addMessage( sendMessageEvent.message );
+		}
+		else if( event instanceof SignOnEvent ){
+			SignOnEvent signOnEvent = (SignOnEvent)event;
+			contactList.addContact(signOnEvent.contact);
+			view.getContactListView().addContact(signOnEvent.contact);
+		}
+		else if( event instanceof SignOffEvent ){
+			SignOffEvent signOffEvent = (SignOffEvent)event;
+			contactList.removeContact(signOffEvent.contact);
+			view.getContactListView().removeContact(signOffEvent.contact);
+		}
+	}  
+
+}

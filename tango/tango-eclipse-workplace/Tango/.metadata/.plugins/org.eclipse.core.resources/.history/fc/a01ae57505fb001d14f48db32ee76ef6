@@ -1,0 +1,7 @@
+package tango.client.messenger;
+
+import com.gwtapps.messenger.client.model.Contact;
+
+public class SignOnEvent extends Event{
+	public Contact contact;
+}

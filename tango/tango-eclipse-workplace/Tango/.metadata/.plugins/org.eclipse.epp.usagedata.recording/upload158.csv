@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676481718
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676483125
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676483828
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676483953
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676483984
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676485484
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676486953
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676492062
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676493734
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676493812
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676493843
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676496609
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676497046
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676497078
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676499390
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676672812
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676673046
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234676674953
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234676678562
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234676682656
+opened,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234676695312
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234676695406
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234676698750
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.edit.findReplace,1234676699281
+activated,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234676700812

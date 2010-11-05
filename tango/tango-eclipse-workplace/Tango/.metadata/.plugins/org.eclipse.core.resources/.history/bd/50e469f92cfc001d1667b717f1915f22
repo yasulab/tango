@@ -1,0 +1,232 @@
+package tango.server.messenger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.gwt.user.client.Event;
+
+import tango.client.messenger.MessengerService;
+import tango.client.messenger.SendMessageEvent;
+import tango.client.messenger.SignOffEvent;
+import tango.client.messenger.SignOnEvent;
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+import tango.client.ui.PickupTango;
+
+public abstract class AbstractMessengerService implements MessengerService {
+	
+	protected static final int MAX_MESSAGE_LENGTH = 256;
+	protected static final int MAX_NAME_LENGTH = 10;
+	
+	// 各ユーザが保有する情報
+	protected class UserInfo{
+		Contact contact;
+		String id;
+		ArrayList events = new ArrayList();
+		ArrayList<PickupTango> pickupTangoList = new ArrayList<PickupTango>();
+	}	
+	
+	// ユーザのMap情報
+	private Map users = new HashMap();
+	
+	public abstract String getCurrentId();
+	public abstract void onEvents( String id );
+	
+	// MessengerService.signIn()関数の実装
+	public void signIn( String name, ArrayList<PickupTango> pickupTangoList ){		
+		//adjust name
+		name = cleanString( name, MAX_NAME_LENGTH );		
+
+		//add user to list
+		String id = getCurrentId();
+		UserInfo user = new UserInfo();
+		user.contact = new Contact( name );
+		user.pickupTangoList = pickupTangoList;
+		user.id = id;
+		//clear events
+		onEvents( user.id );
+		signOut();
+		synchronized( this ){
+			users.put( id, user );
+		}
+		
+		//create sign on event
+		SignOnEvent event = new SignOnEvent();
+		event.contact = user.contact;
+		broadcastEvent( event, user );	// 自分(user)以外の全体にSignOnEventを送る
+		
+		//add sign on events for current contact list
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); )
+			{
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp != user )
+				{
+					SignOnEvent eventTemp = new SignOnEvent();
+					eventTemp.contact = userTemp.contact;
+					user.events.add( eventTemp );
+				}
+			}
+		}
+		onEvents( user.id );
+	}
+	
+	// MessengerService.signOut()関数の実装
+	public void signOut(){
+		//remove user from list
+		Contact contact;
+		String id = getCurrentId();
+		if( users.containsKey(id)){
+			
+			synchronized( this ){
+				UserInfo user = (UserInfo)users.get(id);
+				contact = user.contact;
+				users.remove(id);
+			}
+			
+			//create sign off event
+			SignOffEvent event = new SignOffEvent();
+			event.contact = contact;
+			broadcastEvent( event, null );	// 全体にSignOffEventを送る
+		}
+	}
+	
+	public boolean hasEvents(){
+		UserInfo user = getCurrentUser();
+		if( user == null )
+			return false;
+		return user.events.size() > 0;
+	}
+	
+	// MessengerService.getEvents()関数の実装
+	public ArrayList getEvents(){
+		ArrayList events = null;
+		UserInfo user = getCurrentUser();
+		if( user != null  && user.events.size() > 0){
+			synchronized( user ){
+				events = user.events;
+				user.events = new ArrayList();
+			}
+		}
+		return events;
+	}
+	
+	// MessengerService.sendMessage(Contact, Message)関数の実装
+	public void sendMessage( Contact to, Message message ){
+		//adjust message
+		String cleanMessage = cleanString( message.toString(), MAX_MESSAGE_LENGTH );
+		
+		//get sender and receiver
+		UserInfo sender = getCurrentUser();
+		UserInfo receiver = getUserByName( to.getName() );
+		
+		if( receiver != null ){
+			
+			//create event
+			SendMessageEvent event = new SendMessageEvent();
+			event.sender = sender.contact;
+			event.message = new Message( cleanMessage );
+			
+			//send event to receiver
+			synchronized( receiver )
+			{
+				receiver.events.add( event );
+				onEvents( receiver.id );
+			}
+		}
+	}
+	
+	public void sendPickupTango(PickupTango pickupTango){
+		System.out.println("sendPickupTango() in AbstractMessengerService has started!");	
+	}
+	public void sendPickupTangoList(ArrayList<PickupTango> pickupTangoList){
+		System.out.println("sendPickupTangoList() in AbstractMessengerService has started!");	
+	}
+	public void refreshShareTangoList(){
+		System.out.println("refreshShareTangoList() in AbstractMessengerService has started!");	
+	}
+	
+	
+	
+	// 全てのコンタクトに対してEventを実行させる（キタコレ？）
+	protected void broadcastEvent( Object event, UserInfo except ){
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo user = (UserInfo)entry.getValue();
+				if( user != except ){
+					synchronized( user ){
+						user.events.add( event );
+						onEvents( user.id );
+					}
+				}
+			}
+		}
+	}
+	
+	// 現在のユーザ情報を取得する関数
+	protected UserInfo getCurrentUser(){
+		String id = getCurrentId();
+		synchronized( this ){
+			return (UserInfo)users.get(id);
+		}
+	}	
+	
+	// Nameからユーザ情報を取得する関数
+	protected UserInfo getUserByName( String name ){
+		UserInfo user = null;
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			// 一人でも同じユーザ名を見つけたらfor文から抜ける
+			for( Iterator it = entrySet.iterator(); it.hasNext() && user == null; ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp.contact.getName().compareTo(name) == 0 )
+					user = userTemp;
+			}
+		}
+		return user;
+	}
+	
+	/**
+	 * 全てのユーザ情報を取得する関数
+	 * @return
+	 */
+	protected ArrayList<UserInfo> getAllUserInfo(){
+		ArrayList<UserInfo> allUser = null;
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); ){
+				Map.Entry entry = (Map.Entry)it.next();
+				user = (UserInfo)entry.getValue();
+				allUser.add(user);
+			}
+		}
+		return allUser;
+	}
+	
+	// InputTextの文字列を整形する関数
+	protected String cleanString( String value, int maxLength ){
+		value = value.trim();
+		if( value.length() > maxLength )
+			value = value.substring(0,maxLength);
+		value = value.replaceAll("\\<.*?\\>","");
+		return value;
+	}
+	
+	public ArrayList<PickupTango> convergeArray(ArrayList<ArrayList<PickupTango>> arrayList) {
+		ArrayList<PickupTango> tangoArray = new ArrayList<PickupTango>();
+		
+		for(int i=0; i<arrayList.size(); i++){
+			tangoArray.addAll(arrayList.get(i));
+		}
+		
+		return tangoArray;
+	}
+}

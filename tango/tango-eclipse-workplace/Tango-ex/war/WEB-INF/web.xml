@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  
+  <!-- Servlets -->
+  <servlet>
+		<servlet-name>PickupWordService</servlet-name>
+		<servlet-class>tango.server.word.PickupWordServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GameService</servlet-name>
+		<servlet-class>tango.server.game.GameServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
+	<servlet-name>CanvasService</servlet-name>
+	<servlet-class>
+	tango.server.CanvasServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
+  <servlet-name>messengerServiceImpl</servlet-name>
+  <servlet-class>tango.server.messenger.MessengerServiceImpl</servlet-class>
+</servlet>
+<servlet>
+  <servlet-name>newsRankingImpl</servlet-name>
+  <servlet-class>tango.server.rss.NewsRankingImpl</servlet-class>
+</servlet>
+
+
+  <servlet-mapping>
+		<servlet-name>PickupWordService</servlet-name>
+		<url-pattern>/tango_ex/pickupWordService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GameService</servlet-name>
+		<url-pattern>/tango_ex/gameService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+  <servlet-name>GameService</servlet-name>
+  <url-pattern>/tango_ex/morphemeService</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+  <servlet-name>messengerServiceImpl</servlet-name>
+  <url-pattern>/tango_ex/messenger</url-pattern>
+</servlet-mapping>  
+<servlet-mapping>
+  <servlet-name>newsRankingImpl</servlet-name>
+  <url-pattern>/tango_ex/newsRanking</url-pattern>
+</servlet-mapping>
+
+
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Tango_ex.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

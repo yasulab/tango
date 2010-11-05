@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package com.gwtapps.messenger.client.client;
+
+import com.google.gwt.core.client.EntryPoint;
+
+/**
+ * @author yasukawa
+ *
+ */
+public class Messenger implements EntryPoint {
+
+	public void onModuleLoad() {
+		// TODO Auto-generated method stub 
+	}
+
+}

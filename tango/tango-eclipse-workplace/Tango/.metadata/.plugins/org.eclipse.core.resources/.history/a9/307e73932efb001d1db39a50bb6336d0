@@ -1,0 +1,59 @@
+<html>
+	<head>
+	
+		<title>tango!</title>
+	
+		<style>
+		    body{margin:0px;padding:0px;}
+			body,td,a,div,.p{font-family:arial,sans-serif;margin-left:0px;margin-right:0px;}
+			div,td{color:#000000}
+			a:link,.w,.w a:link{color:#0000cc}
+			a:visited{color:#551a8b}
+			a:active{color:#ff0000}
+			h2{ margin:0px;font-family:arial;}
+			
+			.myContactItem{ background-color:#def; font-weight:bold;}
+			.contactItem td{ padding:5px;}
+			
+			.chatWindow{ border:1px solid #cde; background-color:#FFF; }
+			.chatWindowContent{ padding:5px;}
+			.chatWindowConversation{ border-bottom:1px solid #eee;  }
+			.chatWindowConversation div{ padding-bottom:5px; }
+			.chatWindowInput{ border:2px solid #acf; }
+			.gwtapps-TitleBar{ padding:2px; padding-left:5px; background-color:#def; }
+			.gwtapps-TitleBarTitle{ font-weight:bold; }
+			.gwtapps-TitleBarCommand{ font-size:10px; }
+			.convMessage{ font-size:11px; margin-bottom:5px; }
+.popup{ border:1px solid #CCC; background-color:#FFE; padding:10px;}
+		</style>
+
+		<!--                                           -->
+		<!-- This script loads your compiled module.   -->
+		<!-- If you add any GWT meta tags, they must   -->
+		<!-- be added before this line.                -->
+		<!--                                           -->
+	</head>
+
+	<!--                                           -->
+	<!-- The body can have arbitrary html, or      -->
+	<!-- you can leave the body empty if you want  -->
+	<!-- to create a completely dynamic ui         -->
+	<!--                                           -->
+	<body>
+	<p>
+	Click <a href="./db/Introduction_of_tango_project.pdf" target="_blank">Here</a> to see what tango! is.<BR>
+	And, <a href="http://groups.google.co.jp/group/tango_project" target="_blank">Here</a> is the developers' community of Tango!. <BR>
+	Feel free to contact and join us!<BR>
+	</p>
+	
+	
+	<BR>
+
+
+		<!-- OPTIONAL: include this if you want history support -->
+		<iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+		
+   		<script type="text/javascript" language="javascript" src="tango.Tango.nocache.js"></script>
+   		
+	</body>
+</html>

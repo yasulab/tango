@@ -1,0 +1,114 @@
+package tango.client.rss;
+
+import java.util.Set;
+
+import tango.client.ui.PickupTango;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+/**
+ * <p>
+ * {@link PickupTango}のRSS拡張仕様版です。
+ * </p>
+ * 
+ * @author Ukit Grey
+ * 
+ */
+public class RSSPickupTango extends PickupTango implements IsSerializable {
+
+	private String name;
+	private int count;
+	private int rank;
+	private Set<NewsFields> newsFieldsCollection;
+
+	/* PickupTangoのメンバ */
+	// private int wordLevel;
+	// private String name;
+	// private String howToRead;
+	// private String description;
+	// private String category;
+	
+	/* RankingFieldsのメンバ */
+	// private int count;
+	// private String keyword;
+	// private Set<NewsFields> newsFieldsCollection;
+	// private int rank;
+	
+	/**
+	 * <p>
+	 * このクラスのデフォルトコンストラクタです。
+	 * </p>
+	 */
+	RSSPickupTango() {
+		name = null;
+		count = -1;
+		rank = -1;
+		newsFieldsCollection = null;
+	}
+
+	/**
+	 * <p>
+	 * 引数になっているRankingFieldsからインスタンスを生成します。
+	 * </p>
+	 * 
+	 * @param rankingFields このクラスを生成するための{@link RankingFields}クラス
+	 */
+	RSSPickupTango(RankingFields rankingFields) {
+		name = rankingFields.getKeyword();
+		count = rankingFields.getCount();
+		rank = rankingFields.getRank();
+		newsFieldsCollection = rankingFields.getNewsFieldsCollection();
+	}
+	
+	RSSPickupTango(String name, int count, int rank) {
+		this.name = name;
+		this.count = count;
+		this.rank = rank;
+		this.newsFieldsCollection = null;
+	}
+
+	/**
+	 * <p>
+	 * このクラスの単語名を取得します。
+	 * </p>
+	 * 
+	 * @return 単語名
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <p>
+	 * このクラスの単語の出現回数を取得します。
+	 * </p>
+	 * 
+	 * @return 単語の出現回数
+	 */
+	public int getCount() {
+		return count;
+	}
+
+	/**
+	 * <p>
+	 * このクラスの単語のランクを取得します。
+	 * </p>
+	 * 
+	 * @return 単語のランク
+	 */
+	public int getRank() {
+		return rank;
+	}
+
+	/**
+	 * <p>
+	 * このクラスの単語が含まれるニュースのコレクションを取得します。
+	 * </p>
+	 * 
+	 * @return ニュースのコレクション
+	 */
+	public Set<NewsFields> getNewsFieldsCollection() {
+		return newsFieldsCollection;
+	}
+
+}

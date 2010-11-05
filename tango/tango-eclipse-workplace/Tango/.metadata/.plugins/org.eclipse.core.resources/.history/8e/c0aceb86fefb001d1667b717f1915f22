@@ -1,0 +1,83 @@
+package tango.client.messenger.view;
+
+import java.util.ArrayList;
+
+import tango.client.share.ShareTangoMain;
+import tango.client.ui.PickupTango;
+import tango.client.ui.TangoPanel;
+import tango.client.ui.TangoPanelTable;
+
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+public class ShareTangoWindowView extends Composite{
+	static final int SHARE_TANGO_WINDOW_WIDTH = 250;
+	static final int SHARE_TANGO_WINDOW_HEIGHT = 200;
+	static final int SHARE_TANGO_WINDOW_MARGIN = 5;
+	static final int SHARE_TANGO_WINDOW_OFFSET = 20;
+
+	private MessengerView view;
+	private ScrollPanel conversationScroller = new ScrollPanel();
+	private TangoPanelTable tangoPanelTable = new TangoPanelTable();
+	private Label titleLabel = new Label();
+
+	public ShareTangoWindowView( MessengerView view){
+		this.view = view;
+
+		VerticalPanel mainPanel = new VerticalPanel();
+		initWidget( mainPanel );	
+
+		VerticalPanel vpanel = new VerticalPanel();
+		vpanel.setHeight("100%");
+		vpanel.setWidth("100%");
+		mainPanel.add( vpanel );
+		mainPanel.setCellHeight(vpanel, "100%");
+
+		titleLabel.setText("Share Tango Window");
+		vpanel.add(titleLabel);
+		
+		conversationScroller.setHeight("150px");
+		conversationScroller.setWidget( tangoPanelTable );
+		vpanel.add( conversationScroller );
+		vpanel.setCellHeight(conversationScroller, "100%");	
+
+		setStyleName("chatWindow");
+		vpanel.setStyleName("chatWindowContent");
+		conversationScroller.setStyleName("chatWindowConversation");
+
+		ShareTangoMain.setShareTangoWindow(this);
+	}
+
+	/**
+	 * @param message
+	 * ContactとMessageが同時に引数に与えられた場合
+	 * 指定されたコンタクトに対してメッセージを送信する
+	 */
+	public void addPickupTangoList(ArrayList<PickupTango> pickupTangoList ){
+		System.out.println("addPickupTangoList in ShareTangoWindowView");
+		if(pickupTangoList.isEmpty()){
+			System.out.println("pickupTangoList is Empty!");
+		}else{
+			System.out.println("pickupTangos.size = " + pickupTangoList.size());
+		}
+		if(pickupTangoList.size()>0){
+			for(int i=0;i<pickupTangoList.size();i++){
+				tangoPanelTable.addWordPanel(TangoPanel.tangoPanel(pickupTangoList.get(i)));
+			}
+		}
+		conversationScroller.setScrollPosition(tangoPanelTable.getOffsetHeight());
+	}
+
+	public void show(){
+		setWidth( SHARE_TANGO_WINDOW_WIDTH + "px" );
+		setHeight(SHARE_TANGO_WINDOW_HEIGHT + "px");
+		setVisible( true );
+	}
+
+	public void triggerSendSavedTango(){
+		view.getListener().onSendSavedTango(new PickupTango());
+	}
+
+}

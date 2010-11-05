@@ -1,0 +1,44 @@
+package tango.client.share;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import tango.client.messenger.Messenger;
+import tango.client.messenger.view.ChatWindowView;
+
+/**
+ * @author yasukawa
+ * This class is a main panel of "Game Tango!".
+ */
+public class ShareTangoMain extends Composite{
+	public static DockPanel mainPanel;
+	public Messenger messenger = new Messenger();
+			
+	public ShareTangoMain(){
+		/* Initialize */
+		mainPanel = new DockPanel();
+		
+		/* Share Tango! Layout*/
+		mainPanel.add(messenger, DockPanel.WEST);
+
+		/* style sheet */
+		mainPanel.setStyleName("ShareTango-main");
+		
+		initWidget(mainPanel);
+	}
+	static public void setChatWindow(ChatWindowView cwView){
+		mainPanel.add(cwView, DockPanel.CENTER);
+		System.out.println("setChatWindow has done!");
+	}
+}

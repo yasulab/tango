@@ -1,0 +1,16 @@
+author yohei yasukawa
+2009/11/20
+
+This is a source code of web application, tango!, which picks up words randomly, and provides them to users in order to support brainstorming.
+
+tango! is powered by following tools:
+        - Google Web Toolkit 1.6.4
+        - Google App Engine 1.2.5
+        - Eclipse JEE Ganymede SR2 Linux gtk x86_64
+        - Apache Derby 10.4.2.0
+
+If you would like to see the demo first or
+to see it in details, please visit the URL below.
+
+http://www.yasulab.com/software/tango
+

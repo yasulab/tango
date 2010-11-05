@@ -1,0 +1,10 @@
+package com.gwtapps.messenger.client;
+
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.Message;
+
+public class SendMessageEvent extends Event 
+{
+	public Contact sender;
+	public Message message;
+}

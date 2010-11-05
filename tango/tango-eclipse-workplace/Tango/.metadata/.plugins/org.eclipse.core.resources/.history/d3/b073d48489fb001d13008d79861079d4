@@ -1,0 +1,146 @@
+package tango.client.ui;
+
+
+
+import tango.client.Tango;
+
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+/**
+ * @author yasukawa
+ * Define contents of each panel that is appeared after pushing "Tango!" button. 
+ * Mainly called by WordPanelTable.
+ */
+public class TangoPanel extends Composite {
+	private Button wordPanel;
+	private final PickupTango tango;
+	private int xPos;
+	private int yPos;
+	private boolean savedFlag;
+
+	/* Default Constructor */
+	public TangoPanel(){
+		this.tango = new PickupTango(0, "にゅー", "NEW", "新しい", "形容詞");
+		this.wordPanel = new Button(tango.getName());
+		this.savedFlag = false;
+
+		wordPanel.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				// Create the new popup.
+				final TangoPanelPopup popup = new TangoPanelPopup();
+				popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						xPos = wordPanel.getAbsoluteLeft() + wordPanel.getOffsetWidth();
+						yPos = wordPanel.getAbsoluteTop() + wordPanel.getOffsetHeight()/2;
+						popup.setPopupPosition(xPos, yPos);
+					}
+				});
+			}
+		});
+
+		//style sheet
+		wordPanel.addStyleName("WordPanel");
+
+		initWidget(wordPanel);
+	}
+
+	/* Main Constructor */
+	public TangoPanel(PickupTango pickupWord){
+		tango = pickupWord;
+		this.wordPanel = new Button(tango.getName());
+		this.savedFlag = false;
+
+		wordPanel.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				// Create the new popup.
+				final TangoPanelPopup popup = new TangoPanelPopup();
+				popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+					public void setPosition(int offsetWidth, int offsetHeight) {
+						xPos = wordPanel.getAbsoluteLeft() + wordPanel.getOffsetWidth();
+						yPos = wordPanel.getAbsoluteTop() + wordPanel.getOffsetHeight()/2;
+						popup.setPopupPosition(xPos, yPos);
+					}
+				});
+			}
+		});
+
+		/* style sheet */
+		wordPanel.addStyleName("WordPanel");
+
+		initWidget(wordPanel);
+	}
+
+	private class TangoPanelPopup extends PopupPanel{
+		private VerticalPanel vPanel;
+		private Label hLabel;
+		private Label dLabel;
+		private Button saveBtn;
+		private ClickListener cListener;
+
+		public TangoPanelPopup(){
+			super(true);	// 範囲外をクリックすることでポップアップを消せるようにする
+			vPanel = new VerticalPanel();
+			hLabel = new Label("読み方：" + tango.getHowToRead());
+			dLabel = new Label("説明：" + tango.getDescription());
+			cListener = new ClickListener(){
+				public void onClick(Widget sender) {
+					if(isSaveWord()==false){
+						saveWord();	// この単語を保存し、テーブルから削除する。
+					}else{
+						deleteWord();
+					}
+					setVisible(false); // 保存された単語のポップアップ表示を消す。
+				}
+			};
+			saveBtn = new Button();
+			saveBtn.addClickListener(cListener);
+			
+			if(isSaveWord()==false){
+				saveBtn.setText("この単語を保存する");
+			}else{
+				saveBtn.setText("この単語を削除する");
+			}
+			
+			vPanel.add(hLabel);
+			vPanel.add(dLabel);
+			vPanel.add(saveBtn);
+			setWidget(vPanel);
+		}
+	}
+
+	/* この関数を呼び出したWord　PanelをsaveWordTableに保存する */
+	public void saveWord(){
+		this.savedFlag = true;
+		Tango.saveWordPanel(this);
+	}
+
+	// この関数を呼び出したword panelをsaveWordTableの(x,y)座標に保存する
+	public void saveWord(int row, int col){
+		Tango.saveWordPanel(row, col, this);
+	}
+	
+	public void deleteWord(){
+		this.removeFromParent();
+		Tango.saveWordTable.infillSpaces();
+	}
+	
+	public boolean isSaveWord(){
+		return this.savedFlag;
+	}
+
+	/* Word Panelの表示名を変更する*/
+	public void setText(String titleLabel){
+		wordPanel.setText(titleLabel);
+	}
+	
+	public PickupTango getPickupTango(){
+		return tango;
+	}
+}

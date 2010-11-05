@@ -1,0 +1,379 @@
+Reachable types computed on: Fri Nov 20 15:29:47 JST 2009
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+com.google.gwt.user.client.ui.ChangeListenerCollection
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.ui.ChangeListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+com.google.gwt.user.client.ui.ClickListenerCollection
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.ui.ClickListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+com.google.gwt.user.client.ui.FocusListenerCollection
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.ui.FocusListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+com.google.gwt.user.client.ui.KeyboardListenerCollection
+   Serialization status
+      Instantiable
+   Path
+      'com.google.gwt.user.client.ui.KeyboardListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.lang.Boolean
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.Boolean' is reachable as a subtype of type 'class java.lang.Boolean'
+      'java.lang.Boolean' is reachable from type argument 1 of type 'java.util.TreeMap<K, V>'
+      'java.util.TreeMap<E, java.lang.Boolean>' is reachable as a subtype of type 'interface java.util.SortedMap<E, java.lang.Boolean>'
+      'java.util.SortedMap<E, java.lang.Boolean>' is reachable from field 'map' of type 'java.util.TreeSet<E>'
+      'java.util.TreeSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.lang.Exception
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.RuntimeException
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.lang.String
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String' is reachable as a subtype of type 'class java.lang.String'
+      Started from 'java.lang.String'
+
+java.lang.String[]
+   Serialization status
+      Instantiable
+   Path
+      'java.lang.String[]' is reachable from field 'categories' of type 'tango.client.rss.RSSFields'
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.lang.Throwable
+   Serialization status
+      Field serializable
+   Path
+      'java.lang.Throwable' is reachable as a supertype of type 'class java.lang.Exception'
+      'java.lang.Exception' is reachable as a supertype of type 'class java.lang.RuntimeException'
+      'java.lang.RuntimeException' is reachable as a supertype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException' is reachable as a subtype of type 'class com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+      Started from 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException'
+
+java.util.ArrayList<com.google.gwt.user.client.ui.FocusListener>
+   Serialization status
+      Field serializable
+   Path
+      'java.util.ArrayList<com.google.gwt.user.client.ui.FocusListener>' is reachable as a supertype of type 'class com.google.gwt.user.client.ui.FocusListenerCollection'
+      'com.google.gwt.user.client.ui.FocusListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<com.google.gwt.user.client.ui.ClickListener>
+   Serialization status
+      Field serializable
+   Path
+      'java.util.ArrayList<com.google.gwt.user.client.ui.ClickListener>' is reachable as a supertype of type 'class com.google.gwt.user.client.ui.ClickListenerCollection'
+      'com.google.gwt.user.client.ui.ClickListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<com.google.gwt.user.client.ui.KeyboardListener>
+   Serialization status
+      Field serializable
+   Path
+      'java.util.ArrayList<com.google.gwt.user.client.ui.KeyboardListener>' is reachable as a supertype of type 'class com.google.gwt.user.client.ui.KeyboardListenerCollection'
+      'com.google.gwt.user.client.ui.KeyboardListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<com.google.gwt.user.client.ui.ChangeListener>
+   Serialization status
+      Field serializable
+   Path
+      'java.util.ArrayList<com.google.gwt.user.client.ui.ChangeListener>' is reachable as a supertype of type 'class com.google.gwt.user.client.ui.ChangeListenerCollection'
+      'com.google.gwt.user.client.ui.ChangeListenerCollection' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<tango.client.messenger.Event>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<tango.client.ui.PickupTango>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.ui.PickupTango>'
+      'java.util.ArrayList<tango.client.ui.PickupTango>' is reachable from field 'pickupTangoList' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable as a subtype of type 'class java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>'
+      'java.util.ArrayList<java.util.ArrayList<tango.client.ui.PickupTango>>' is reachable from field 'shareTangoList' of type 'tango.client.messenger.RefreshShareTangoEvent'
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.HashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.HashSet<tango.client.rss.NewsFields>' is reachable as a supertype of type 'class java.util.LinkedHashSet<tango.client.rss.NewsFields>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.LinkedHashSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.TreeMap<E, java.lang.Boolean>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.TreeMap<E, java.lang.Boolean>' is reachable as a subtype of type 'interface java.util.SortedMap<E, java.lang.Boolean>'
+      'java.util.SortedMap<E, java.lang.Boolean>' is reachable from field 'map' of type 'java.util.TreeSet<E>'
+      'java.util.TreeSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+java.util.TreeSet<tango.client.rss.NewsFields>
+   Serialization status
+      Instantiable
+   Path
+      'java.util.TreeSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.Event
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.Event' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.RefreshShareTangoEvent
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.RefreshShareTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.SendMessageEvent
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.SendMessageEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.SendSavedTangoEvent
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.SignOffEvent
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.SignOffEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.SignOnEvent
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.SignOnEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.model.Contact
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.model.Contact' is reachable as a subtype of type 'class tango.client.messenger.model.Contact'
+      'tango.client.messenger.model.Contact' is reachable from field 'contact' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.messenger.model.Message
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.messenger.model.Message' is reachable as a subtype of type 'class tango.client.messenger.model.Message'
+      'tango.client.messenger.model.Message' is reachable from field 'message' of type 'tango.client.messenger.SendMessageEvent'
+      'tango.client.messenger.SendMessageEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.rss.RSSFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.RSSFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.rss.TopicFields
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.TopicFields' is reachable as a subtype of type 'interface tango.client.rss.NewsFields'
+      'tango.client.rss.NewsFields' is reachable from type argument 0 of type 'java.util.LinkedHashSet<E>'
+      'java.util.LinkedHashSet<tango.client.rss.NewsFields>' is reachable as a subtype of type 'interface java.util.Set<tango.client.rss.NewsFields>'
+      'java.util.Set<tango.client.rss.NewsFields>' is reachable from field 'newsFieldsCollection' of type 'tango.client.rss.ui.RSSPickupTango'
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.rss.ui.RSSPickupTango
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.rss.ui.RSSPickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+
+tango.client.ui.PickupTango
+   Serialization status
+      Instantiable
+   Path
+      'tango.client.ui.PickupTango' is reachable as a subtype of type 'class tango.client.ui.PickupTango'
+      'tango.client.ui.PickupTango' is reachable from field 'pickupTango' of type 'tango.client.messenger.SendSavedTangoEvent'
+      'tango.client.messenger.SendSavedTangoEvent' is reachable as a subtype of type 'class tango.client.messenger.Event'
+      'tango.client.messenger.Event' is reachable from type argument 0 of type 'java.util.ArrayList<E>'
+      'java.util.ArrayList<tango.client.messenger.Event>' is reachable as a subtype of type 'class java.util.ArrayList<tango.client.messenger.Event>'
+      Started from 'java.util.ArrayList<tango.client.messenger.Event>'
+

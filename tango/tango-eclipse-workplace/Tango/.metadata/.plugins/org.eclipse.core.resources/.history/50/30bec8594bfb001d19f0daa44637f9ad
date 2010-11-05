@@ -1,0 +1,6 @@
+package tango.client.share;
+import com.google.gwt.user.client.rpc.RemoteService;
+
+public interface GameService extends RemoteService {
+	public String gameService(String msg) throws Exception;
+}

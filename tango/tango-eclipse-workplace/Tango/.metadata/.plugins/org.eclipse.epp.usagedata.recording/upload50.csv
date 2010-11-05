@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588833859
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.1.R34x_v20080818,org.eclipse.equinox.p2.ui.sdk.update,1234588833937
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588844375
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588852343
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588853546
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588913656
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588914078
+activated,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234588916375
+activated,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234588917390
+activated,view,org.eclipse.ui.navigator.resources,3.3.101.M20080910-0800,org.eclipse.ui.navigator.ProjectExplorer,1234588919125
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234588919125
+closed,editor,org.eclipse.jdt.ui,3.4.1.r341_v20080827-1100,org.eclipse.jdt.ui.CompilationUnitEditor,1234588919140
+closed,editor,org.eclipse.pde.ui,3.4.0.v20080803-1700,org.eclipse.pde.ui.featureEditor,1234588919156
+closed,editor,org.eclipse.pde.ui,3.4.0.v20080803-1700,org.eclipse.pde.ui.buildEditor,1234588919156
+closed,editor,org.eclipse.wst.xml.ui,1.0.410.v200809120143,org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart,1234588919171
+closed,editor,org.eclipse.ui.editors,3.4.0.v20080603-2000,org.eclipse.ui.DefaultTextEditor,1234588919171
+executed,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234588920593
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234588929765
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234588930109
+no handler,command,org.eclipse.ui,3.4.1.M20080910-0800,org.eclipse.ui.file.refresh,1234588930312
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588933156
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588939390
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588946203
+activated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588949359
+deactivated,workbench,org.eclipse.ui.workbench,3.4.1.M20080827-0800a,,1234588949375

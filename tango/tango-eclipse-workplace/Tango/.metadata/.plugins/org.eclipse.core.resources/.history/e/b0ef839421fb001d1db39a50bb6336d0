@@ -1,0 +1,45 @@
+package tango.client.game;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import tango.client.messenger.Messenger;
+
+/**
+ * @author yasukawa
+ * This class is a main panel of "Game Tango!".
+ */
+public class GameTangoMain extends Composite{
+	private DockPanel mainPanel;
+	public Messenger messenger = new Messenger();
+	
+	public GameTangoMain(){
+
+		
+		/* Initialize */
+		mainPanel = new DockPanel();
+		
+		/* Game Tango! Layout*/
+		mainPanel.add(new Label("Game Tango!"), DockPanel.NORTH);
+
+		/* style sheet */
+		mainPanel.setStyleName("GameTango-main");
+		
+		// UIの構築
+		Panel panel = new VerticalPanel();
+		mainPanel.add(panel, DockPanel.CENTER);
+		mainPanel.add(messenger, DockPanel.SOUTH);
+		
+		initWidget(mainPanel);
+	}
+}

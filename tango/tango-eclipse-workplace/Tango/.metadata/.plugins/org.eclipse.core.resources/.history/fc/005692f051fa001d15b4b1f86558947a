@@ -1,0 +1,165 @@
+package com.gwtapps.messenger.server;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.gwtapps.messenger.client.MessengerService;
+import com.gwtapps.messenger.client.SendMessageEvent;
+import com.gwtapps.messenger.client.SignOffEvent;
+import com.gwtapps.messenger.client.SignOnEvent;
+import com.gwtapps.messenger.client.model.Contact;
+import com.gwtapps.messenger.client.model.Message;
+
+public class MessengerServiceImpl extends RemoteServiceServlet implements MessengerService {
+	
+	protected static final int MAX_MESSAGE_LENGTH = 256;
+	protected static final int MAX_NAME_LENGTH = 10;
+	
+	private class UserInfo{
+		Contact contact;
+		ArrayList events = new ArrayList();
+	}	
+	
+	private Map users = new HashMap();
+	public void signIn( String name ){		
+		//adjust name
+		name = cleanString( name, MAX_NAME_LENGTH );		
+
+		//add user to list
+		String id = getThreadLocalRequest().getSession().getId();
+		UserInfo user = new UserInfo();
+		user.contact = new Contact( name );
+		synchronized( this ){
+			users.put( id, user );
+		}
+		
+		//create sign on event
+		SignOnEvent event = new SignOnEvent();
+		event.contact = user.contact;
+		broadcastEvent( event, user );
+		
+		//add sign on events for current contact list
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); )
+			{
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp != user )
+				{
+					SignOnEvent eventTemp = new SignOnEvent();
+					eventTemp.contact = userTemp.contact;
+					user.events.add( eventTemp );
+				}
+			}
+		}
+	}
+	
+	public void signOut(){
+		//remove user from list
+		Contact contact;
+		String id = getThreadLocalRequest().getSession().getId();
+		synchronized( this ){
+			UserInfo user = (UserInfo)users.get(id);
+			contact = user.contact;
+			users.remove(id);
+		}
+		
+		//create sign on event
+		SignOffEvent event = new SignOffEvent();
+		event.contact = contact;
+		broadcastEvent( event, null );
+	}
+	
+	public ArrayList getEvents(){
+		ArrayList events = null;
+		UserInfo user = getCurrentUser();
+		if( user != null ){
+			if( user.events.size() == 0 ){
+				try{
+					synchronized( user ){
+						user.wait( 30*1000 );
+					}
+				} 
+				catch (InterruptedException ignored){}
+			}
+			synchronized( user ){
+				events = user.events;
+				user.events = new ArrayList();
+			}
+		}
+		return events;
+	}
+	
+	public void sendMessage( Contact to, Message message ){
+		//adjust message
+		String cleanMessage = cleanString( message.toString(), MAX_MESSAGE_LENGTH );
+		
+		//get sender and receiver
+		UserInfo sender = getCurrentUser();
+		UserInfo receiver = getUserByName( to.getName() );
+		
+		if( receiver != null ){
+			//create event
+			SendMessageEvent event = new SendMessageEvent();
+			event.sender = sender.contact;
+			event.message = new Message( cleanMessage );
+			
+			//send event to receiver
+			synchronized( receiver ){
+				receiver.events.add( event );
+				receiver.notifyAll();
+			}
+		}
+	}
+	
+	protected void broadcastEvent( Object event, UserInfo except ){
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext(); ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo user = (UserInfo)entry.getValue();
+				if( user != except ){
+					synchronized( user ){
+						user.events.add( event );
+						user.notifyAll();
+					}
+				}
+			}
+		}
+	}
+	
+	protected UserInfo getCurrentUser(){
+		String id = getThreadLocalRequest().getSession().getId();
+		synchronized( this ){
+			return (UserInfo)users.get(id);
+		}
+	}	
+	
+	protected UserInfo getUserByName( String name ){
+		UserInfo user = null;
+		synchronized( this ){
+			Set entrySet = users.entrySet();
+			for( Iterator it = entrySet.iterator(); it.hasNext() && user == null; ){
+				Map.Entry entry = (Map.Entry)it.next();
+				UserInfo userTemp = (UserInfo)entry.getValue();
+				if( userTemp.contact.getName().compareTo(name) == 0 )
+					user = userTemp;
+			}
+		}
+		return user;
+	}
+	
+	protected String cleanString( String value, int maxLength ){
+		value = value.trim();
+		if( value.length() > maxLength )
+			value = value.substring(0,maxLength);
+		value = value.replaceAll("\\<.*?\\>","");
+		return value;
+	}
+}

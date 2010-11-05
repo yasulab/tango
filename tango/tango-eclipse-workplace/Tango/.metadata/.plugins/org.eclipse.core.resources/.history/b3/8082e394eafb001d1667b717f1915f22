@@ -1,0 +1,8 @@
+package tango.client.messenger;
+
+import tango.client.messenger.model.Contact;
+
+public class SignOnEvent extends Event{
+	public Contact contact;
+	public ArrayList<PickupTangoList> savedTangoList;
+}

@@ -1,0 +1,155 @@
+package tango.client.rss;
+
+import java.util.ArrayList;
+
+import tango.client.ui.PickupTango;
+import tango.client.ui.PickupTangoResultSet;
+import tango.client.ui.TangoPanelTable;
+import tango.client.ui.TangoTableBox;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.Widget;
+/*
+ * @author yasukawa
+ * This class is a main panel of "RSS Tango!".
+ */
+public class RSSTangoMain extends Composite{
+	DockPanel mainPanel;
+	HorizontalPanel settingPanel;
+	ScrollPanel settingScrollPanel;
+	Button rssButton;
+	HorizontalPanel settingHorizontalPanel;
+	TangoPanelTable rssPanelTable;
+	TangoTableBox rssTableBox;
+	
+	PickupTangoResultSet resultSet = new PickupTangoResultSet();
+	ArrayList<PickupTango> receivePickupWords = new ArrayList<PickupTango>();
+	String errorMessage;
+	
+	public RSSTangoMain(){
+		/* Initialize */
+		mainPanel = new DockPanel();
+		settingPanel = new HorizontalPanel();
+		settingScrollPanel  = new ScrollPanel();
+		// relationalWordBox = new RelationalWordBox(this);;
+		rssButton = new Button("tango!");
+		settingHorizontalPanel = new HorizontalPanel();
+		rssPanelTable = new TangoPanelTable();
+		rssTableBox = new TangoTableBox(rssPanelTable);
+		
+		
+		/* Click Action on "Tango!" button */
+		rssButton.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				/* Initialize */
+				errorMessage = "errorMessage default";
+				resultSet.pickupWords.clear();
+				setTestDataOnLocal(resultSet);
+				// resultSet.setAllData(wordLevelBox, wordClassBox, relationalWordBox, wordTableBox);
+				
+				// プロキシオブジェクトを取得
+				RSSServiceAsync proxy = (RSSServiceAsync) GWT.create(RSSService.class);
+				
+				// サービスへのエントリポイントを設定
+				ServiceDefTarget entrypoint = (ServiceDefTarget) proxy;
+				String path = GWT.getModuleBaseURL();
+				entrypoint.setServiceEntryPoint(path+"rssService");
+
+				// PickupWordServiceの反応を定義
+				AsyncCallback<Object> callback = new AsyncCallback<Object>() {
+					@SuppressWarnings("unchecked")	// 警告を投げる
+					
+					/* 単語の取得に成功した場合 */
+					public void onSuccess(Object returnMsg){
+						ArrayList<PickupTango> pickupRSSs = (ArrayList<PickupTango>) returnMsg;
+						if(pickupRSSs.get(0).getName() == "SQLException"){
+							errorMessage = pickupRSSs.get(0).getDescription()
+										   + "\n" + pickupRSSs.get(0).getClass();
+							Window.alert(errorMessage);
+						}else if(pickupRSSs.get(0).getName() == "Exception"){
+							errorMessage = pickupRSSs.get(0).getDescription();
+							Window.alert(errorMessage);
+						}else if(pickupRSSs.size() > 0){
+							rssPanelTable.shuffle(pickupRSSs);
+						}else Window.alert("取得できる単語がありません。");
+						
+						/*** debug mode ***/
+						if(resultSet.debugMode == true){
+							Window.alert(pickupRSSs.get(0).getDescription());
+						}
+						/******************/
+					}
+
+					/* 単語の取得に失敗した場合 */
+					public void onFailure(Throwable caught) {
+						Window.alert("[onFailure] 'caught.getMessage()' is \n" + caught.getMessage());
+					}
+				};
+				
+				// サービスの呼び出し
+				resultSet.debugModeOff();
+				proxy.rssService(resultSet, callback);
+			}
+		});
+		
+		/* Simple tango! Panel Layout */
+		/* Word Panel Table Layout */
+		mainPanel.add(settingPanel, DockPanel.NORTH);
+		mainPanel.add(rssPanelTable, DockPanel.CENTER);
+		mainPanel.setCellHeight(rssPanelTable,"0px");
+		mainPanel.setCellHorizontalAlignment(rssPanelTable, DockPanel.ALIGN_CENTER);
+		mainPanel.setCellVerticalAlignment(rssPanelTable, DockPanel.ALIGN_TOP);
+	    settingPanel.add(rssButton);
+	    settingPanel.add(settingScrollPanel);
+	    settingPanel.setCellVerticalAlignment(rssButton, HorizontalPanel.ALIGN_MIDDLE);
+	    settingPanel.setCellVerticalAlignment(settingScrollPanel, HorizontalPanel.ALIGN_MIDDLE);
+	    settingScrollPanel.setAlwaysShowScrollBars(false); // make Scroll Bar visible?, or not.
+	    settingScrollPanel.setPixelSize(600, 120);
+	    settingScrollPanel.add(settingHorizontalPanel);
+	    settingHorizontalPanel.add(rssTableBox);
+	    
+	    /* Setting Style Sheet */
+		settingPanel.setStyleName("SettingPanel");
+	    rssButton.setStyleName("TangoButton");
+	    settingScrollPanel.setStyleName("SettingScrollPanel");
+	    settingHorizontalPanel.setStyleName("SettingHorizontalPanel");
+	    
+	    
+		initWidget(mainPanel);
+	}
+	
+	private void setTestDataOnLocal(PickupTangoResultSet pwrSet){
+		/* PickupWord(int id, String name, String howToRead, String description) */
+		/* 実はIDはいらない・・・？ */
+		///*
+		// public PickupWord(int wordLevel, String howToRead, String name, String description, String category){
+		pwrSet.pickupWords.clear();
+		pwrSet.pickupWords.add(new PickupTango(0, "あげおし", "上尾市", "埼玉県の市。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(1, "あげかす", "揚げ滓", "飛行機を上に向ける、かじのとり方。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(2, "あげさげ" , "上げ下げ", "上げることと、下げること。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(3, "あげしお", "上げ潮", "潮が満ちること。みちしお。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(4, "あげざる", "揚げ笊", "ゆでたそばをすくい上げる、ざる。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(5, "あげぜん", "上げ膳", "客に、食事の膳を出すこと。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(6, "あげぞこ", "上げ底", "中身を多く見せるため、そこを上げた容器。", "名詞")	);
+		pwrSet.pickupWords.add(new PickupTango(7, "あげたて", "揚げ立て", "油で揚げたばかりであること。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(8, "あげだし", "揚げ出し", "片栗粉をまぶし、油であげたもの。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(9, "あげたま", "挙げ玉", "揚げ物をして、油の中に残ったかす。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(10, "あげなす", "揚げ茄子", "＊＊＊", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(11, "あげなべ", "揚げ鍋", "揚げ物に使うなべ。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(12, "あげはば", "上げ幅", "元の位置から、上がった位置までの幅。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(13, "あげはま", "揚げ浜", "機械などで、海水をくみ上げる塩田。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(14, "あげはま", "揚げ浜", "アゲハマ囲碁で、相手から取った石。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(15, "あげぶた", "上げ蓋", "取り外しができる床板。", "名詞"));
+		pwrSet.pickupWords.add(new PickupTango(15, "あげパン", "揚げ―", "油であげたパン。", "名詞"));
+		//*/
+	}
+}

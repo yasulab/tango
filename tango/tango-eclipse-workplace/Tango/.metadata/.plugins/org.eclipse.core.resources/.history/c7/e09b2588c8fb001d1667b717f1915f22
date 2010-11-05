@@ -1,0 +1,17 @@
+package tango.client.messenger;
+
+import java.util.ArrayList;
+
+import tango.client.messenger.model.Contact;
+import tango.client.messenger.model.Message;
+import tango.client.ui.PickupTango;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public interface MessengerServiceAsync{
+	void signIn( String name, AsyncCallback<?> callback );
+	void signOut(AsyncCallback<?> callback);
+	void sendMessage( Contact to, Message message, AsyncCallback<?> callback );
+	void sendSavedTango(PickupTango pickupTango, AsyncCallback<?> callback);
+	void getEvents(AsyncCallback<ArrayList<Event>> callback);
+}

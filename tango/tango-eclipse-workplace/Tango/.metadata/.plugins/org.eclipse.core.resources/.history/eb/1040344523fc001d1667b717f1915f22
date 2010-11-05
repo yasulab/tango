@@ -1,0 +1,146 @@
+package tango.server.messenger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.CometEvent;
+import org.apache.catalina.CometProcessor;
+
+import tango.client.ui.PickupTango;
+
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.server.rpc.RPC;
+import com.google.gwt.user.server.rpc.RPCRequest;
+
+public class MessengerServiceCometImpl extends HttpServlet implements CometProcessor {
+	
+	class CometMessengerService extends AbstractMessengerService{
+
+		final ThreadLocal perThreadRequest = new ThreadLocal();
+		public String getCurrentId() {
+			return ((HttpServletRequest)perThreadRequest.get()).getSession(true).getId();
+		}
+
+		
+		public void onEvents(String id) {
+			synchronized(pendingRequests){
+				PendingRequest pr = (PendingRequest)pendingRequests.get( id );
+				if( pr != null ){
+					pendingRequests.remove(id);
+					sendResponse( pr.event, pr.rpcRequest );
+				}
+			}
+		}
+
+		public void sendSavedTango(PickupTango pickupTango) {
+			// TODO Auto-generated method stub
+			System.out.println("sendSavedTango in MessengerServiceCometImpl");
+		}
+
+		public void sendSavedTangoList(ArrayList<PickupTango> pickupTangoList) {
+			// TODO Auto-generated method stub
+			System.out.println("sendSavedTangoList in MessengerServiceCometImpl");
+		}
+
+
+		@Override
+		public ArrayList<ArrayList<PickupTango>> getAllSavedTangoList() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+	
+	class PendingRequest{
+		RPCRequest rpcRequest;
+		CometEvent event;
+		public PendingRequest(RPCRequest rpcRequest, CometEvent event) {
+			this.rpcRequest = rpcRequest;
+			this.event = event;
+		}
+	}
+	
+	Map pendingRequests = new HashMap();
+	CometMessengerService messengerService =  new CometMessengerService();
+	
+	public void event(CometEvent event) throws IOException, ServletException {
+		if (event.getEventType() == CometEvent.EventType.READ) {
+			//get the RPC request
+			RPCRequest rpcRequest = RPC.decodeRequest( readRequest( event ) );
+			Method targetMethod = rpcRequest.getMethod();
+
+			//if its the event request then wait for events
+			synchronized(pendingRequests){
+			messengerService.perThreadRequest.set( event.getHttpServletRequest() );
+				if( targetMethod.getName().equals("getEvents") && !messengerService.hasEvents() ){
+					//save this request for processing later.
+					pendingRequests.put( messengerService.getCurrentId(), new PendingRequest( rpcRequest, event ) );
+				}
+				else{
+					//otherwise process the RPC call as usual
+					sendResponse( event, rpcRequest );
+				}
+			}
+		}
+	}
+
+	public void sendResponse( CometEvent event, RPCRequest rpcRequest ) {
+		try{
+			try{
+				messengerService.perThreadRequest.set( event.getHttpServletRequest() );
+				String result = RPC.invokeAndEncodeResponse(messengerService, rpcRequest.getMethod(), rpcRequest.getParameters());
+				writeResponse(event.getHttpServletResponse(), result);
+				event.close();
+
+			} catch (IncompatibleRemoteServiceException e) {
+				writeResponse( event.getHttpServletResponse(), RPC.encodeResponseForFailure(null, e) );
+			} 
+		}catch (Throwable e) {
+			writeResponse( event.getHttpServletResponse(), "Server Error" );
+		}
+	}
+	
+	public String readRequest( CometEvent event ) throws IOException, ServletException{
+		int contentLength = event.getHttpServletRequest().getContentLength();
+		if (contentLength == -1) {
+			// Content length must be known.
+			throw new ServletException("Content-Length must be specified");
+		}
+		InputStream in = event.getHttpServletRequest().getInputStream();
+		byte[] payload = new byte[contentLength];
+		int offset = 0;
+		int len = contentLength;
+		int byteCount;
+		while (offset < contentLength) {
+			byteCount = in.read(payload, offset, len);
+			if (byteCount == -1) {
+				throw new ServletException("Client did not send " + contentLength
+						+ " bytes as expected");
+			}
+			offset += byteCount;
+			len -= byteCount;
+		}
+		return new String(payload, "UTF-8");
+	}
+	
+	public void writeResponse( HttpServletResponse response, String body ){
+		try {
+            PrintWriter writer = response.getWriter();
+            writer.print(body);
+            writer.flush();
+        } catch (IOException e) {
+            log("IOExeption sending response", e);
+        }
+	}
+
+}
+

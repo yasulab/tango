@@ -1,0 +1,10 @@
+#Wed Sep 09 01:35:02 JST 2009
+SdkRegistrants=com.google.appengine.eclipse.sdkbundle_1.2.0.v200904062334,com.google.gwt.eclipse.sdkbundle.linux_1.6.4.v200904062334,com.google.appengine.eclipse.sdkbundle_1.2.1.v200905131143,com.google.appengine.eclipse.sdkbundle_1.2.5.v200909021031,com.google.gwt.eclipse.sdkbundle.linux_1.7.0.v200907131030
+versionForLastForcedRebuild_Tango=1.1.0.v200907291609
+addedNewWizardActionsorg.eclipse.jdt.ui.JavaPerspective=true
+addedNewWizardActionsorg.eclipse.debug.ui.DebugPerspective=true
+addedNewWizardActionsorg.eclipse.wst.web.ui.webDevPerspective=true
+addedNewWizardActionsorg.eclipse.ui.resourcePerspective=true
+eclipse.preferences.version=1
+addedNewWizardActionsorg.eclipse.jst.j2ee.J2EEPerspective=true
+versionForLastForcedRebuild_Tango-ex=1.1.0.v200907291609
